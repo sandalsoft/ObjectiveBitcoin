@@ -10,6 +10,7 @@
 
 @implementation Block
 
+
 - (id)initWithDictionary:(NSDictionary *)blockDict {
     if ((self = [super init])) {
         _Hash = [blockDict valueForKey:@"hash"];
@@ -26,8 +27,15 @@
         _PreviousBlockHash = [blockDict valueForKey:@"previousblockhash"];
     }
     
+    
+    
     return self;
     
 };
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Hash: %@\n Confirmations: %@\n Size: %@\n Height: %@\n Version: %@\n MerkleRoot: %@\n Transactions: %@\n Time: %@\n None: %@\n Bits: %@\n Difficulty: %@\n PreviousBlockHash: %@\n", self.Hash, self.Confirmations, self.Size, self.Height, self.Version, self.MerkleRoot, self.Transactions, self.Time, self.Nonce, self.Bits, self.Difficulty, self.PreviousBlockHash];
+}
+
 
 @end
