@@ -53,6 +53,7 @@
 		0743BFF5189E9B6600464FD9 /* RawTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawTransaction.m; sourceTree = "<group>"; };
 		07D0067518B02F1B00D68CC8 /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
 		07D0067618B02F1B00D68CC8 /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.m; sourceTree = "<group>"; };
+		07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectiveBitcoin.podspec; sourceTree = SOURCE_ROOT; };
 		2CC1F2CF72DB4DB1AAFBC821 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61309A5932E40B0A39558F4 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +125,7 @@
 		0743BFCF189DC22800464FD9 /* ObjectiveBitcoin */ = {
 			isa = PBXGroup;
 			children = (
+				07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */,
 				0743BFD2189DC22800464FD9 /* ObjectiveBitcoin.h */,
 				0743BFD3189DC22800464FD9 /* ObjectiveBitcoin.m */,
 				0743BFF0189DC27600464FD9 /* Block.h */,
