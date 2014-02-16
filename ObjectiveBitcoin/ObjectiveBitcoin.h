@@ -7,7 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Transaction.h"
+#import "RawTransaction.h"
+#import "Block.h"
 
 @interface ObjectiveBitcoin : NSObject
+
+
++(void)getTransaction:(NSString *)transactionId
+              success:(void (^)(Transaction *transaction))success
+              failure:(void (^)(NSError *error))failure;
+
++(void)getRawTransaction:(NSString *)transactionId
+              success:(void (^)(RawTransaction *rawTransaction))success
+              failure:(void (^)(NSError *error))failure;
+
 
 @end

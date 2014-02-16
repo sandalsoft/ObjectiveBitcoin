@@ -21,5 +21,6 @@
 @property (strong, nonatomic) NSDate *Time;
 @property (strong, nonatomic) NSDate *BlockTime;
 
+- (id)initWithDictionary:(NSDictionary *)rawTransactionDict;
 
 @end

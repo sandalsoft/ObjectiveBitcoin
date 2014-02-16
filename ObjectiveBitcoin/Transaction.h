@@ -22,6 +22,6 @@
 @property (strong, nonatomic) NSArray *Details;
 
 
-
+- (id)initWithDictionary:(NSDictionary *)transactionDict;
 
 @end

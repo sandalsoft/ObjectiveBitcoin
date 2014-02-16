@@ -23,4 +23,8 @@
 @property (strong, nonatomic) NSNumber *Difficulty;
 @property (strong, nonatomic) NSString *PreviousBlockHash;
 
+
+- (id)initWithDictionary:(NSDictionary *)blockDict;
+
+
 @end
