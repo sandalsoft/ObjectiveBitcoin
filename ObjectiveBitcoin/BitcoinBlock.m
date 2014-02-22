@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Sandalsoft. All rights reserved.
 //
 
-#import "Block.h"
+#import "BitcoinBlock.h"
 
-@implementation Block
+@implementation BitcoinBlock : NSObject 
 
 
 - (id)initWithDictionary:(NSDictionary *)blockDict {

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Transaction.h"
 #import "RawTransaction.h"
-#import "Block.h"
+#import "BitcoinBlock.h"
 
 @interface ObjectiveBitcoin : NSObject
 
@@ -22,5 +22,8 @@
               success:(void (^)(RawTransaction *rawTransaction))success
               failure:(void (^)(NSError *error))failure;
 
++(void)validateAddress:(NSString *)transactionId
+               success:(void (^)(NSDictionary *addressInfo))success
+               failure:(void (^)(NSError *error))failure;
 
 @end

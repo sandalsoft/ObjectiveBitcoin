@@ -15,7 +15,7 @@
               success:(void (^)(Transaction *transaction))success
               failure:(void (^)(NSError *error))failure {
     
-    [[AFHTTPSessionManager manager] GET:@"hi" parameters:@{@"param1" : @"value"}
+    [[AFHTTPSessionManager manager] GET:@"http://dev.sndl.io:18332" parameters:@{@"param1" : @"value"}
                                 success:^(NSURLSessionDataTask *task, id responseObject) {
                                     Transaction *tx = [[Transaction alloc] initWithDictionary:[[NSDictionary alloc] initWithDictionary:(NSDictionary *)responseObject]];
                                     success(tx);
@@ -39,5 +39,17 @@
                                 }];
 }
 
++(void)validateAddress:(NSString *)transactionId
+               success:(void (^)(NSDictionary *addressInfo))success
+               failure:(void (^)(NSError *error))failure {
+    [[AFHTTPSessionManager manager] GET:@"http://dev.sndl.io:18332" parameters:@{@"param1" : @"value"}
+                                success:^(NSURLSessionDataTask *task, id responseObject) {
+                                    NSDictionary *addressDict = [[NSDictionary alloc] initWithDictionary:(NSDictionary *)responseObject];
+                                    success(addressDict);
+                                }
+                                failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                    failure(error);
+                                }];
+}
 
 @end
