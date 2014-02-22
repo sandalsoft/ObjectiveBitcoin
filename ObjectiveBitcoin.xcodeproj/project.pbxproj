@@ -14,12 +14,18 @@
 		0743BFDF189DC22900464FD9 /* libObjectiveBitcoin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFC6189DC22800464FD9 /* libObjectiveBitcoin.a */; };
 		0743BFE5189DC22900464FD9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0743BFE3189DC22900464FD9 /* InfoPlist.strings */; };
 		0743BFE7189DC22900464FD9 /* ObjectiveBitcoinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743BFE6189DC22900464FD9 /* ObjectiveBitcoinTests.m */; };
-		0743BFF2189DC27600464FD9 /* Block.h in Headers */ = {isa = PBXBuildFile; fileRef = 0743BFF0189DC27600464FD9 /* Block.h */; };
-		0743BFF3189DC27600464FD9 /* Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743BFF1189DC27600464FD9 /* Block.m */; };
+		0743BFF2189DC27600464FD9 /* BitcoinBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0743BFF0189DC27600464FD9 /* BitcoinBlock.h */; };
+		0743BFF3189DC27600464FD9 /* BitcoinBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743BFF1189DC27600464FD9 /* BitcoinBlock.m */; };
 		0743BFF6189E9B6600464FD9 /* RawTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 0743BFF4189E9B6600464FD9 /* RawTransaction.h */; };
 		0743BFF7189E9B6600464FD9 /* RawTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743BFF5189E9B6600464FD9 /* RawTransaction.m */; };
+		07745BA918B9078A0096A376 /* BitcoindJSONRPCClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 07745BA718B9078A0096A376 /* BitcoindJSONRPCClient.h */; };
+		07745BAA18B9078A0096A376 /* BitcoindJSONRPCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 07745BA818B9078A0096A376 /* BitcoindJSONRPCClient.m */; };
+		07745BAD18B911E50096A376 /* BitcoindInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 07745BAB18B911E50096A376 /* BitcoindInfo.h */; };
+		07745BAE18B911E50096A376 /* BitcoindInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 07745BAC18B911E50096A376 /* BitcoindInfo.m */; };
 		07D0067718B02F1B00D68CC8 /* Transaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D0067518B02F1B00D68CC8 /* Transaction.h */; };
 		07D0067818B02F1B00D68CC8 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D0067618B02F1B00D68CC8 /* Transaction.m */; };
+		07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFCC189DC22800464FD9 /* Foundation.framework */; };
+		07D006BC18B0682600D68CC8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */; };
 		F5219023F70248BB98D8968D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC1F2CF72DB4DB1AAFBC821 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -47,13 +53,18 @@
 		0743BFE2189DC22900464FD9 /* ObjectiveBitcoinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveBitcoinTests-Info.plist"; sourceTree = "<group>"; };
 		0743BFE4189DC22900464FD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0743BFE6189DC22900464FD9 /* ObjectiveBitcoinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveBitcoinTests.m; sourceTree = "<group>"; };
-		0743BFF0189DC27600464FD9 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		0743BFF1189DC27600464FD9 /* Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Block.m; sourceTree = "<group>"; };
+		0743BFF0189DC27600464FD9 /* BitcoinBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoinBlock.h; sourceTree = "<group>"; };
+		0743BFF1189DC27600464FD9 /* BitcoinBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoinBlock.m; sourceTree = "<group>"; };
 		0743BFF4189E9B6600464FD9 /* RawTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawTransaction.h; sourceTree = "<group>"; };
 		0743BFF5189E9B6600464FD9 /* RawTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawTransaction.m; sourceTree = "<group>"; };
+		07745BA718B9078A0096A376 /* BitcoindJSONRPCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoindJSONRPCClient.h; sourceTree = "<group>"; };
+		07745BA818B9078A0096A376 /* BitcoindJSONRPCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoindJSONRPCClient.m; sourceTree = "<group>"; };
+		07745BAB18B911E50096A376 /* BitcoindInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoindInfo.h; sourceTree = "<group>"; };
+		07745BAC18B911E50096A376 /* BitcoindInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoindInfo.m; sourceTree = "<group>"; };
 		07D0067518B02F1B00D68CC8 /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
 		07D0067618B02F1B00D68CC8 /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.m; sourceTree = "<group>"; };
 		07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectiveBitcoin.podspec; sourceTree = SOURCE_ROOT; };
+		07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2CC1F2CF72DB4DB1AAFBC821 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E61309A5932E40B0A39558F4 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07D006BC18B0682600D68CC8 /* SystemConfiguration.framework in Frameworks */,
+				07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */,
 				0743BFCA189DC22800464FD9 /* Cocoa.framework in Frameworks */,
 				F5219023F70248BB98D8968D /* libPods.a in Frameworks */,
 			);
@@ -104,6 +117,7 @@
 		0743BFC8189DC22800464FD9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */,
 				0743BFC9189DC22800464FD9 /* Cocoa.framework */,
 				0743BFDA189DC22800464FD9 /* XCTest.framework */,
 				0743BFCB189DC22800464FD9 /* Other Frameworks */,
@@ -128,8 +142,12 @@
 				07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */,
 				0743BFD2189DC22800464FD9 /* ObjectiveBitcoin.h */,
 				0743BFD3189DC22800464FD9 /* ObjectiveBitcoin.m */,
-				0743BFF0189DC27600464FD9 /* Block.h */,
-				0743BFF1189DC27600464FD9 /* Block.m */,
+				07745BA718B9078A0096A376 /* BitcoindJSONRPCClient.h */,
+				07745BA818B9078A0096A376 /* BitcoindJSONRPCClient.m */,
+				07745BAB18B911E50096A376 /* BitcoindInfo.h */,
+				07745BAC18B911E50096A376 /* BitcoindInfo.m */,
+				0743BFF0189DC27600464FD9 /* BitcoinBlock.h */,
+				0743BFF1189DC27600464FD9 /* BitcoinBlock.m */,
 				0743BFF4189E9B6600464FD9 /* RawTransaction.h */,
 				0743BFF5189E9B6600464FD9 /* RawTransaction.m */,
 				07D0067518B02F1B00D68CC8 /* Transaction.h */,
@@ -173,8 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				07D0067718B02F1B00D68CC8 /* Transaction.h in Headers */,
-				0743BFF2189DC27600464FD9 /* Block.h in Headers */,
+				07745BAD18B911E50096A376 /* BitcoindInfo.h in Headers */,
+				0743BFF2189DC27600464FD9 /* BitcoinBlock.h in Headers */,
 				0743BFF6189E9B6600464FD9 /* RawTransaction.h in Headers */,
+				07745BA918B9078A0096A376 /* BitcoindJSONRPCClient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +317,9 @@
 				0743BFF7189E9B6600464FD9 /* RawTransaction.m in Sources */,
 				0743BFD4189DC22800464FD9 /* ObjectiveBitcoin.m in Sources */,
 				07D0067818B02F1B00D68CC8 /* Transaction.m in Sources */,
-				0743BFF3189DC27600464FD9 /* Block.m in Sources */,
+				07745BAE18B911E50096A376 /* BitcoindInfo.m in Sources */,
+				0743BFF3189DC27600464FD9 /* BitcoinBlock.m in Sources */,
+				07745BAA18B9078A0096A376 /* BitcoindJSONRPCClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

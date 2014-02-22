@@ -14,21 +14,21 @@
 
 - (id)initWithDictionary:(NSDictionary *)transactionDict {
     if ((self = [super init])) {
-        _Amount = [transactionDict valueForKey:@"amount"];
-        _Confirmations = [transactionDict valueForKey:@"confirmations"];
-        _BlockHash = [transactionDict valueForKey:@"blockhash"];
-        _BlockIndex = [transactionDict valueForKey:@"blockindex"];
-        _BlockTime = [NSDate dateWithTimeIntervalSince1970:[[transactionDict valueForKey:@"blocktime"] doubleValue]];
-        _TxId = [transactionDict valueForKey:@"txid"];
-        _Time = [NSDate dateWithTimeIntervalSince1970:[[transactionDict valueForKey:@"time"] doubleValue]];
-        _TimeReceived = [NSDate dateWithTimeIntervalSince1970:[[transactionDict valueForKey:@"timereceived"] doubleValue]];
-        _Details = [transactionDict valueForKey:@"details"];
+        _amount = [transactionDict valueForKey:@"amount"];
+        _confirmations = [transactionDict valueForKey:@"confirmations"];
+        _blockHash = [transactionDict valueForKey:@"blockhash"];
+        _blockIndex = [transactionDict valueForKey:@"blockindex"];
+        _blockTime = [NSDate dateWithTimeIntervalSince1970:[[transactionDict valueForKey:@"blocktime"] doubleValue]];
+        _txId = [transactionDict valueForKey:@"txid"];
+        _time = [NSDate dateWithTimeIntervalSince1970:[[transactionDict valueForKey:@"time"] doubleValue]];
+        _timeReceived = [NSDate dateWithTimeIntervalSince1970:[[transactionDict valueForKey:@"timereceived"] doubleValue]];
+        _details = [transactionDict valueForKey:@"details"];
     }
     return self;
 };
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Amount: %@\n Confirmations: %@\n BlockHash: %@\n BlockIndex: %@\n BlockTime: %@\n TxId: %@\n Time: %@\n TimeReceived: %@\n Details: %@\n", self.Amount, self.Confirmations, self.BlockHash, self.BlockIndex, self.BlockTime, self.TxId, self.Time, self.TimeReceived, self.Details];
+    return [NSString stringWithFormat:@"Amount: %@\n Confirmations: %@\n BlockHash: %@\n BlockIndex: %@\n BlockTime: %@\n TxId: %@\n Time: %@\n TimeReceived: %@\n Details: %@\n", self.amount, self.confirmations, self.blockHash, self.blockIndex, self.blockTime, self.txId, self.time, self.timeReceived, self.details];
 }
 
 

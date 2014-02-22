@@ -13,5 +13,4 @@ Pod::Spec.new do |s|
   s.source_files = 'ObjectiveBitcoin/*.{h,m}'
   s.framework    = 'SystemConfiguration'
   s.requires_arc = true
-  s.ios.dependency 'AFNetworking'
 end

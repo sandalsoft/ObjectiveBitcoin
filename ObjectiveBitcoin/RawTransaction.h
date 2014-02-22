@@ -10,17 +10,19 @@
 
 @interface RawTransaction : NSObject
 
-@property (strong, nonatomic) NSString *Hex;
-@property (strong, nonatomic) NSString *TransactionId;
-@property (strong, nonatomic) NSNumber *Version;
-@property (strong, nonatomic) NSNumber *LockTime;
-@property (strong, nonatomic) NSArray *VIn;
-@property (strong, nonatomic) NSArray *VOut;
-@property (strong, nonatomic) NSString *BlockHash;
-@property (strong, nonatomic) NSNumber *Confirmations;
-@property (strong, nonatomic) NSDate *Time;
-@property (strong, nonatomic) NSDate *BlockTime;
+@property (strong, nonatomic) NSString *hex;
+@property (strong, nonatomic) NSString *transactionId;
+@property (strong, nonatomic) NSNumber *version;
+@property (strong, nonatomic) NSNumber *lockTime;
+@property (strong, nonatomic) NSArray *vIn;
+@property (strong, nonatomic) NSArray *vOut;
+@property (strong, nonatomic) NSString *blockHash;
+@property (strong, nonatomic) NSNumber *confirmations;
+@property (strong, nonatomic) NSDate *time;
+@property (strong, nonatomic) NSDate *blockTime;
 
 - (id)initWithDictionary:(NSDictionary *)rawTransactionDict;
+
+- (NSString *)description;
 
 @end

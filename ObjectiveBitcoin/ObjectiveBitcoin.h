@@ -10,9 +10,12 @@
 #import "Transaction.h"
 #import "RawTransaction.h"
 #import "BitcoinBlock.h"
+#import "BitcoindInfo.h"
 
 @interface ObjectiveBitcoin : NSObject
 
++(void)getInfo:(void (^)(BitcoindInfo *info))success
+       failure:(void (^)(NSError *error))failure;
 
 +(void)getTransaction:(NSString *)transactionId
               success:(void (^)(Transaction *transaction))success

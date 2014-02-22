@@ -13,22 +13,22 @@
 
 - (id)initWithDictionary:(NSDictionary *)rawTransactionDict {
     if ((self = [super init])) {
-         _Hex = [rawTransactionDict valueForKey:@"hex"];
-        _TransactionId = [rawTransactionDict valueForKey:@"txid"];
-        _Version = [rawTransactionDict valueForKey:@"version"];
-        _LockTime = [rawTransactionDict valueForKey:@"locktime"];
-        _VIn = [rawTransactionDict valueForKey:@"vin"];
-        _VOut = [rawTransactionDict valueForKey:@""];
-        _BlockHash = [rawTransactionDict valueForKey:@"blockhash"];
-        _Confirmations = [rawTransactionDict valueForKey:@"confirmations"];
-        _Time = [rawTransactionDict valueForKey:@"time"];
-        _BlockTime = [rawTransactionDict valueForKey:@"blocktime"];
+        _hex = [rawTransactionDict valueForKey:@"hex"];
+        _transactionId = [rawTransactionDict valueForKey:@"txid"];
+        _version = [rawTransactionDict valueForKey:@"version"];
+        _lockTime = [rawTransactionDict valueForKey:@"locktime"];
+        _vIn = [rawTransactionDict valueForKey:@"vin"];
+        _vOut = [rawTransactionDict valueForKey:@""];
+        _blockHash = [rawTransactionDict valueForKey:@"blockhash"];
+        _confirmations = [rawTransactionDict valueForKey:@"confirmations"];
+        _time = [rawTransactionDict valueForKey:@"time"];
+        _blockTime = [rawTransactionDict valueForKey:@"blocktime"];
     }
     return self;
 };
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Hex: %@\n TransactionId: %@\n Version: %@\n LockTime: %@\n VIn: %@\n VOut: %@\n BlockHash: %@\n Confirmations: %@\n Time: %@\n BlockTime: %@\n", self.Hex, self.TransactionId, self.Version, self.LockTime, self.VIn, self.VOut, self.BlockHash, self.Confirmations, self.Time, self.BlockTime];
+    return [NSString stringWithFormat:@"Hex: %@\n TransactionId: %@\n Version: %@\n LockTime: %@\n VIn: %@\n VOut: %@\n BlockHash: %@\n Confirmations: %@\n Time: %@\n BlockTime: %@\n", self.hex, self.transactionId, self.version, self.lockTime, self.vIn, self.vOut, self.blockHash, self.confirmations, self.time, self.blockTime];
 }
 
 

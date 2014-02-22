@@ -11,17 +11,19 @@
 @interface Transaction : NSObject
 
 
-@property (strong, nonatomic) NSNumber *Amount;
-@property (strong, nonatomic) NSNumber *Confirmations;
-@property (strong, nonatomic) NSString *BlockHash;
-@property (strong, nonatomic) NSNumber *BlockIndex;
-@property (strong, nonatomic) NSDate *BlockTime;
-@property (strong, nonatomic) NSString *TxId;
-@property (strong, nonatomic) NSDate *Time;
-@property (strong, nonatomic) NSDate *TimeReceived;
-@property (strong, nonatomic) NSArray *Details;
+@property (strong, nonatomic) NSNumber *amount;
+@property (strong, nonatomic) NSNumber *confirmations;
+@property (strong, nonatomic) NSString *blockHash;
+@property (strong, nonatomic) NSNumber *blockIndex;
+@property (strong, nonatomic) NSDate *blockTime;
+@property (strong, nonatomic) NSString *txId;
+@property (strong, nonatomic) NSDate *time;
+@property (strong, nonatomic) NSDate *timeReceived;
+@property (strong, nonatomic) NSArray *details;
 
 
 - (id)initWithDictionary:(NSDictionary *)transactionDict;
+
+- (NSString *)description;
 
 @end
