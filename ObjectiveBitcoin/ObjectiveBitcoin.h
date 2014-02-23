@@ -28,8 +28,7 @@
 -(id)initWithHost:(NSString *)host
          port:(NSString *)port
      username:(NSString *)username
-     password:(NSString *)password
-    isTestnet:(Boolean)isTestnet;
+     password:(NSString *)password;
 
 
 -(void)getInfo:(void (^)(BitcoindInfo *info))success

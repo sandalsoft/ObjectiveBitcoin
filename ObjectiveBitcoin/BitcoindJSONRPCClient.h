@@ -13,14 +13,13 @@
 @property (strong, nonatomic) NSString *hostUrl;
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *password;
-@property (assign, nonatomic) Boolean isTestnet;
+
 
 
 +(BitcoindJSONRPCClient *)sharedClientWithHost:(NSString *)host
               port:(NSString *)port
           username:(NSString *)username
-          password:(NSString *)password
-         isTestnet:(Boolean)isTestnet;
+          password:(NSString *)password;
 
 
 

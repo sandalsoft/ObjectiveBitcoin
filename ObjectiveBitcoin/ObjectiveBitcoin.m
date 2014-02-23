@@ -16,12 +16,11 @@
 -(id)initWithHost:(NSString *)host
          port:(NSString *)port
      username:(NSString *)username
-     password:(NSString *)password
-    isTestnet:(Boolean)isTestnet {
+     password:(NSString *)password {
     
     self = [super init];
     if (self) {
-        _bitcoindClient = [BitcoindJSONRPCClient sharedClientWithHost:host port:port username:username password:password isTestnet:isTestnet];
+        _bitcoindClient = [BitcoindJSONRPCClient sharedClientWithHost:host port:port username:username password:password];
     }
     return self;
 }

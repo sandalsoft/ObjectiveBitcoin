@@ -15,8 +15,7 @@
 +(BitcoindJSONRPCClient *)sharedClientWithHost:(NSString *)host
               port:(NSString *)port
           username:(NSString *)username
-          password:(NSString *)password
-         isTestnet:(Boolean)isTestnet {
+          password:(NSString *)password {
     
     static BitcoindJSONRPCClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
