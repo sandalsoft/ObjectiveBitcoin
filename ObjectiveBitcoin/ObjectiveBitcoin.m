@@ -40,11 +40,12 @@
 }
 
 -(void)getAccountAddress:(NSString *)account
-                 success:(void (^)(NSString *address))success
+                 success:(void (^)(BitcoinAddress *address))success
                  failure:(void (^)(NSError *error))failure {
     
     [self.bitcoindClient callMethod:@"getaccountaddress" withParams:@[@"test"] success:^(NSDictionary *jsonData) {
-        NSString *address = [jsonData valueForKey:@"result"];
+        NSString *addressString = [jsonData valueForKey:@"result"];
+        BitcoinAddress *address = [[BitcoinAddress alloc] initWithString:addressString];
         success(address);
     } failure:^(NSError *error) {
         failure(error);

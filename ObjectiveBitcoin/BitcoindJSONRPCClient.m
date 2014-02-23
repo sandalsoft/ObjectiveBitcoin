@@ -52,7 +52,7 @@
     
     // Create the HTTP Basic authentication header.  We concat 'Basic ' + a base64 encoded string of 'username:password'
     // See http://en.wikipedia.org/wiki/Basic_access_authentication#Client_side for more details
-    NSString *authString = [NSString stringWithFormat:@"Basic X%@", [self encodeUsernamePassword:self.username password:self.password]];
+    NSString *authString = [NSString stringWithFormat:@"Basic %@", [self encodeUsernamePassword:self.username password:self.password]];
     sessionConfiguration.HTTPAdditionalHeaders = @{@"Authorization":authString};
     
     // Create the NSURLSession using the NSURLSessionConfiguration from above
@@ -87,13 +87,25 @@
             //  Authentication Error
             case 401: {
                 NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
-                                           NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Bad Authentication.", nil),
+                                           NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Unauthorized.", nil),
                                            NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"Make sure the username and password is valid.", nil),
                                            @"HTTP Response":NSLocalizedString([httpResponse description], nil)};
-                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:401 userInfo:userInfo];
+                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:httpResponse.statusCode userInfo:userInfo];
                 failure(error);
             }
-             
+           
+                //  Authentication Error
+            case 403: {
+                NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
+                                           NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Forbidden Access.", nil),
+                                           NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"Make sure the IP address of the client is allowed to conncet to the bitcoind server.  Make sure bitcoind uses -rpcallowip=<ip> or has configration in bitcoin.conf.", nil),
+                                           @"HTTP Response":NSLocalizedString([httpResponse description], nil)};
+                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:httpResponse.statusCode userInfo:userInfo];
+                failure(error);
+            }
+                
+
+                
             // Server Error
             case 500: {
                     NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
@@ -101,7 +113,7 @@
                                                NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"HTTP 500 Error.  This is usually a problem with the HTTP POST body, or the bitcoind daemon you're hitting has problems.  If you think this is a problem with the HTTP POST, send email to eric@sndl.io with details", nil),
                                                @"HTTP Response":NSLocalizedString([httpResponse description], nil)};
                     
-                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:500 userInfo:userInfo];
+                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:httpResponse.statusCode userInfo:userInfo];
                     failure(error);
             }
                 

@@ -7,11 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
 #import "Transaction.h"
 #import "RawTransaction.h"
 #import "BitcoinBlock.h"
 #import "BitcoindInfo.h"
 #import "BitcoindJSONRPCClient.h"
+#import "BitcoinAddress.h"
+
+
+
 
 
 @interface ObjectiveBitcoin : NSObject
@@ -30,7 +36,7 @@
        failure:(void (^)(NSError *error))failure;
 
 -(void)getAccountAddress:(NSString *)account
-              success:(void (^)(NSString *address))success
+              success:(void (^)(BitcoinAddress *address))success
               failure:(void (^)(NSError *error))failure;
 
 
