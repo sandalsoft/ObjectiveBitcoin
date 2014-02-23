@@ -10,26 +10,51 @@
 
 @implementation BitcoindJSONRPCClient
 
-+ (void)callMethod:(NSString *)methodName
-               url:(NSString *)hostURL
-        withParams:(NSArray *)params
+
++(BitcoindJSONRPCClient *)sharedClientWithHost:(NSString *)host
+              port:(NSString *)port
           username:(NSString *)username
           password:(NSString *)password
-        useTestnet:(Boolean)isTestnet
+         isTestnet:(Boolean)isTestnet {
+    
+    static BitcoindJSONRPCClient *_sharedClient = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedClient = [[self alloc] initWithHost:host port:port username:username password:password];
+    });
+    return _sharedClient;
+}
+
+- (id)initWithHost:(NSString *)host
+              port:(NSString *)port
+          username:(NSString *)username
+          password:(NSString *)password {
+    if (self = [super init]) {
+        _hostUrl = [NSString stringWithFormat:@"%@:%@", host, port];
+        _username = username;
+        _password = password;
+        
+    }
+    return self;
+    
+}
+
+- (void)callMethod:(NSString *)methodName
+        withParams:(NSArray *)params
            success:(void (^)(NSDictionary *jsonData))success
            failure:(void (^)(NSURLResponse *error))failure {
     
     
-    NSLog(@"paramsString: %@", [self createParamsString:params]);
+//    NSLog(@"paramsString: %@", [self createParamsString:params]);
     NSString *bitcoindPayload = [NSString stringWithFormat:@"{\"jsonrpc\":\"1.0\", \"id\":\"objective-c test\", \"method\": \"%@\", \"params\":%@}",methodName, [self createParamsString:params]];
     
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     
-    NSString *tits = [NSString stringWithFormat:@"Basic %@", [self encodeUsernamePassword:username password:password]];
+    NSString *tits = [NSString stringWithFormat:@"Basic %@", [self encodeUsernamePassword:self.username password:self.password]];
     sessionConfiguration.HTTPAdditionalHeaders = @{@"Authorization":tits}; //,@"Content-Length":payloadLength};
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
-    NSURL *url = [NSURL URLWithString:@"http://dev.sndl.io:18332/"];
+    NSURL *url = [NSURL URLWithString:self.hostUrl];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPBody = [bitcoindPayload dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPMethod = @"POST";
@@ -50,7 +75,7 @@
     [postDataTask resume];
 }
 
-+ (NSString *)encodeUsernamePassword:(NSString *)username
+- (NSString *)encodeUsernamePassword:(NSString *)username
                             password:(NSString *)password {
     NSString *plainString = [NSString stringWithFormat:@"%@:%@", username, password];
     
@@ -60,7 +85,7 @@
 }
 
 
-+ (NSString *)createParamsString:(NSArray *)params {
+- (NSString *)createParamsString:(NSArray *)params {
     // If no paras, return empty JSON brackets
     if ([params count] == 0)
         return @"[]";

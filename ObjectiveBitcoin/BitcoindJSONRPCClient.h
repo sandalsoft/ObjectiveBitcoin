@@ -10,22 +10,32 @@
 
 @interface BitcoindJSONRPCClient : NSObject
 
+@property (strong, nonatomic) NSString *hostUrl;
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *password;
+@property (assign, nonatomic) Boolean isTestnet;
 
-+(void)callMethod:(NSString *)methodName
-               url:(NSString *)hostURL
-        withParams:(NSArray *)params
+
+
++(BitcoindJSONRPCClient *)sharedClientWithHost:(NSString *)host
+              port:(NSString *)port
           username:(NSString *)username
           password:(NSString *)password
-        useTestnet:(Boolean)isTestnet
-           success:(void (^)(NSDictionary *jsonData))success
+         isTestnet:(Boolean)isTestnet;
+
+
+
+-(void)callMethod:(NSString *)methodName
+        withParams:(NSArray *)params
+          success:(void (^)(NSDictionary *jsonData))success
            failure:(void (^)(NSURLResponse *error))failure;
 
 
-+(NSString *)encodeUsernamePassword:(NSString *)username
+-(NSString *)encodeUsernamePassword:(NSString *)username
                             password:(NSString *)password;
 
 
-+(NSString *)createParamsString:(NSArray *)params;
+-(NSString *)createParamsString:(NSArray *)params;
 
 
 @end
