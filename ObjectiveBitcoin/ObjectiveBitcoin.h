@@ -39,6 +39,19 @@
               failure:(void (^)(NSError *error))failure;
 
 
+
+-(void)getBalanceForAccount:(NSString *)account
+          success:(void (^)(NSNumber *balance))success
+          failure:(void (^)(NSError *error))failure;
+
+-(void)getBalanceForAccount:(NSString *)account
+withMinimumConfirmations:(NSNumber *)minconf
+          success:(void (^)(NSNumber *balance))success
+          failure:(void (^)(NSError *error))failure;
+
+
+
+
 -(void)getTransaction:(NSString *)transactionId
               success:(void (^)(Transaction *transaction))success
               failure:(void (^)(NSError *error))failure;

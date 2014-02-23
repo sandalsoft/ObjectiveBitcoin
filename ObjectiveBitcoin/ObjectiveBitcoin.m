@@ -42,10 +42,48 @@
                  success:(void (^)(BitcoinAddress *address))success
                  failure:(void (^)(NSError *error))failure {
     
-    [self.bitcoindClient callMethod:@"getaccountaddress" withParams:@[@"test"] success:^(NSDictionary *jsonData) {
+    [self.bitcoindClient callMethod:@"getaccountaddress" withParams:@[account] success:^(NSDictionary *jsonData) {
         NSString *addressString = [jsonData valueForKey:@"result"];
         BitcoinAddress *address = [[BitcoinAddress alloc] initWithString:addressString];
         success(address);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void)getBalanceForAccount:(NSString *)account
+          success:(void (^)(NSNumber *))success
+          failure:(void (^)(NSError *))failure {
+    
+    // Be defensive about incoming params.  account could be nil
+    if (!account)
+        account = @"";
+
+    [self getBalanceForAccount:account withMinimumConfirmations:[NSNumber numberWithInt:1] success:^(NSNumber *balance) {
+        success(balance);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void)getBalanceForAccount:(NSString *)account
+withMinimumConfirmations:(NSNumber *)minconf
+          success:(void (^)(NSNumber *))success
+          failure:(void (^)(NSError *))failure {
+    
+    // Be defensive about incoming params.  account could be nil
+    if (!account)
+        account = @"";
+    
+    if (!minconf)
+        minconf = 0;
+    
+    [self.bitcoindClient callMethod:@"getbalance" withParams:@[account, minconf] success:^(NSDictionary *jsonData) {
+        
+        NSNumber *balance = [jsonData valueForKey:@"result"];
+        success(balance);
+        
+        
     } failure:^(NSError *error) {
         failure(error);
     }];

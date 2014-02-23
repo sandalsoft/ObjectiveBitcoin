@@ -103,7 +103,6 @@
                 failure(error);
             }
                 
-
                 
             // Server Error
             case 500: {
@@ -152,36 +151,53 @@
 
 - (NSString *)createParamsString:(NSArray *)params {
     // If no paras, return empty JSON brackets
-    if ([params count] == 0)
+    
+    if ([params count] == 0 || !params)
         return @"[]";
+    
     
     // Alloc and init mutable string of params
     NSMutableString *paramsString = [[NSMutableString alloc] init];
     
     // Beginning of params JSON string.  Params must be in quotes, so we need to escape the quotes in string creation
-    [paramsString appendString:@"[\""];
+    [paramsString appendString:@"["];
     
     // If only 1 param, no need to loop, create the string and append the end quote and bracket
     if ([params count] == 1)
-        [paramsString appendString:[NSString stringWithFormat:@"%@\"]", params[0]]];
+        [paramsString appendString:[NSString stringWithFormat:@"\"%@\"]", params[0]]];
     
     // For more than 1 param, loop through params array and append quoted param and comma: "param",
     else {
-        
         for (int param=0; param < [params count]; param++) {
-            
-            // If not the last param, append param and comma: "param",
-            if (param != ([params count] -1))
-                [paramsString appendString:[NSString stringWithFormat:@"\"%@\"]", params[param]]];
-            
-            // If the last param, don't append omma but append closing bracket: "param"]
-            else
-                [paramsString appendString:[NSString stringWithFormat:@"\"%@\", ", params[param]]];
+            if ([params[param] isKindOfClass:[NSNumber class]]) {
+                // If the first of multiple params
+                if (param == 0)
+                    [paramsString appendString:[NSString stringWithFormat:@"%@", params[param]]];
+                
+                // If the last param, don't append omma but append closing bracket: "param"]
+                else
+                    [paramsString appendString:[NSString stringWithFormat:@", %@", params[param]]];
+            }
+            else {
+                // If the first of multiple params
+                if (param == 0)
+                    [paramsString appendString:[NSString stringWithFormat:@"\"%@\"", params[param]]];
+                
+                // If the last param, don't append omma but append closing bracket: "param"]
+                else
+                [paramsString appendString:[NSString stringWithFormat:@", \"%@\"", params[param]]];
+            }
         }
+        [paramsString appendString:@"]"];
     }
     return paramsString;
 }
 
+
+//            // If not the first or last param, append param and comma: "param",
+//            else  if (param != ([params count] -1)){
+//                [paramsString appendString:[NSString stringWithFormat:@", \"%@\"", params[param]]];
+//            }
 
 
 @end
