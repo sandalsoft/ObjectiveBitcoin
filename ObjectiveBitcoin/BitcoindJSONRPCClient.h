@@ -27,7 +27,7 @@
 -(void)callMethod:(NSString *)methodName
         withParams:(NSArray *)params
           success:(void (^)(NSDictionary *jsonData))success
-           failure:(void (^)(NSURLResponse *error))failure;
+           failure:(void (^)(NSError *error))failure;
 
 
 -(NSString *)encodeUsernamePassword:(NSString *)username

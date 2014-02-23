@@ -34,9 +34,7 @@
     [self.bitcoindClient callMethod:@"getinfo" withParams:@[] success:^(NSDictionary *jsonData) {
         NSDictionary *infoDict = [[NSDictionary alloc] initWithDictionary:[jsonData objectForKey:@"result"]];
         success([[BitcoindInfo alloc] initWithDictionary:infoDict]);
-    } failure:^(NSURLResponse *responseError) {
-
-        NSError *error = [NSError errorWithDomain:@"getInfo" code:666 userInfo:@{@"errorkey":@"errorinfo"}];
+    } failure:^(NSError *error) {
         failure(error);
     }];
 }
@@ -48,8 +46,7 @@
     [self.bitcoindClient callMethod:@"getaccountaddress" withParams:@[@"test"] success:^(NSDictionary *jsonData) {
         NSString *address = [jsonData valueForKey:@"result"];
         success(address);
-    } failure:^(NSURLResponse *resposeError) {
-        NSError *error = [NSError errorWithDomain:@"getInfo" code:666 userInfo:@{@"errorkey":@"errorinfo"}];
+    } failure:^(NSError *error) {
         failure(error);
     }];
 }

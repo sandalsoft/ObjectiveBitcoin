@@ -45,14 +45,14 @@
 - (void)callMethod:(NSString *)methodName
         withParams:(NSArray *)params
            success:(void (^)(NSDictionary *jsonData))success
-           failure:(void (^)(NSURLResponse *error))failure {
+           failure:(void (^)(NSError *error))failure {
     
     // Create a defauly NSURLSession config.
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     
     // Create the HTTP Basic authentication header.  We concat 'Basic ' + a base64 encoded string of 'username:password'
     // See http://en.wikipedia.org/wiki/Basic_access_authentication#Client_side for more details
-    NSString *authString = [NSString stringWithFormat:@"Basic %@", [self encodeUsernamePassword:self.username password:self.password]];
+    NSString *authString = [NSString stringWithFormat:@"Basic X%@", [self encodeUsernamePassword:self.username password:self.password]];
     sessionConfiguration.HTTPAdditionalHeaders = @{@"Authorization":authString};
     
     // Create the NSURLSession using the NSURLSessionConfiguration from above
@@ -72,21 +72,53 @@
     // Create the NSURLSessionDataTask to perform the post and handle the response in blocks
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         // Create NSHTTPURLResponse from the NSURLResponse to read the HTTP status codes so we know how to handle errors
-        NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
         
-        // If we get a 200, the POST succeseded.  Parse the response JSON and return the success() block
-        if (httpResp.statusCode == 200) {
-            NSError *jsonError;
-            NSDictionary *info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
-            success(info);
-//            NSLog(@"info: %@", [info description]);
+        // Process the response.  Create helpful NSError on known failures
+        switch (httpResponse.statusCode) {
+                
+            // If we get a 200, the POST succeseded.  Parse the response JSON into a NSDictionary and return the success() block
+            case 200: {
+                NSDictionary *info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                success(info);
+                break;
+            }
+                
+            //  Authentication Error
+            case 401: {
+                NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
+                                           NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Bad Authentication.", nil),
+                                           NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"Make sure the username and password is valid.", nil),
+                                           @"HTTP Response":NSLocalizedString([httpResponse description], nil)};
+                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:401 userInfo:userInfo];
+                failure(error);
+            }
+             
+            // Server Error
+            case 500: {
+                    NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
+                                               NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Server Error.", nil),
+                                               NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"HTTP 500 Error.  This is usually a problem with the HTTP POST body, or the bitcoind daemon you're hitting has problems.  If you think this is a problem with the HTTP POST, send email to eric@sndl.io with details", nil),
+                                               @"HTTP Response":NSLocalizedString([httpResponse description], nil)};
+                    
+                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:500 userInfo:userInfo];
+                    failure(error);
+            }
+                
+            // Unknown or unhandled errors
+            default: {
+                NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
+                                           NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Unknown Error.", nil),
+                                           NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"Unimplemented Error Handling", nil),
+                                           @"HTTP Response":NSLocalizedString([httpResponse description], nil)};
+                
+                NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:666 userInfo:userInfo];
+                failure(error);
+
+            }
+                break;
         }
-        
-        // If we didn't get a 200, find out what the problem is, create an error and return it to the caller.
-        // TODO: Add customer error handling
-        else {
-            failure(response);
-        }
+
     }];
     
     
