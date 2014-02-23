@@ -16,7 +16,6 @@
 @property (assign, nonatomic) Boolean isTestnet;
 
 
-
 +(BitcoindJSONRPCClient *)sharedClientWithHost:(NSString *)host
               port:(NSString *)port
           username:(NSString *)username

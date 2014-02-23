@@ -11,6 +11,7 @@
 
 @implementation ObjectiveBitcoin
 
+// init function instantiates BitcoindJSONRPCClient singleton.  We accept parameters needed to setup the client to make calls once, and reuse that instance.
 
 -(id)initWithHost:(NSString *)host
          port:(NSString *)port
@@ -26,6 +27,7 @@
 }
 
 
+#pragma mark - bitciond methods
 -(void)getInfo:(void (^)(BitcoindInfo *info))success
        failure:(void (^)(NSError *error))failure {
     

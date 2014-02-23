@@ -11,6 +11,7 @@
 @implementation BitcoindJSONRPCClient
 
 
+// Singleton implementation using GCD.  Google for details
 +(BitcoindJSONRPCClient *)sharedClientWithHost:(NSString *)host
               port:(NSString *)port
           username:(NSString *)username
@@ -25,6 +26,8 @@
     return _sharedClient;
 }
 
+
+// init method with params to setup RPC client
 - (id)initWithHost:(NSString *)host
               port:(NSString *)port
           username:(NSString *)username
@@ -44,36 +47,55 @@
            success:(void (^)(NSDictionary *jsonData))success
            failure:(void (^)(NSURLResponse *error))failure {
     
-    
-//    NSLog(@"paramsString: %@", [self createParamsString:params]);
-    NSString *bitcoindPayload = [NSString stringWithFormat:@"{\"jsonrpc\":\"1.0\", \"id\":\"objective-c test\", \"method\": \"%@\", \"params\":%@}",methodName, [self createParamsString:params]];
-    
+    // Create a defauly NSURLSession config.
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
     
-    NSString *tits = [NSString stringWithFormat:@"Basic %@", [self encodeUsernamePassword:self.username password:self.password]];
-    sessionConfiguration.HTTPAdditionalHeaders = @{@"Authorization":tits}; //,@"Content-Length":payloadLength};
+    // Create the HTTP Basic authentication header.  We concat 'Basic ' + a base64 encoded string of 'username:password'
+    // See http://en.wikipedia.org/wiki/Basic_access_authentication#Client_side for more details
+    NSString *authString = [NSString stringWithFormat:@"Basic %@", [self encodeUsernamePassword:self.username password:self.password]];
+    sessionConfiguration.HTTPAdditionalHeaders = @{@"Authorization":authString};
     
+    // Create the NSURLSession using the NSURLSessionConfiguration from above
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
-    NSURL *url = [NSURL URLWithString:self.hostUrl];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+
+    
+    // Create a mutable URLRequest using the host:port URL passed in
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.hostUrl]];
+    
+    // Create the body of the HTTP POST.  This contains the bitcoind method to call and any parameters
+    NSString *bitcoindPayload = [NSString stringWithFormat:@"{\"jsonrpc\":\"1.0\", \"id\":\"ObjectiveBitcoin - BitcoindJSONRPCCLient\", \"method\": \"%@\", \"params\":%@}",methodName, [self createParamsString:params]];
+    
+    // Add the HTTP POST body to the NSURLRquest and use the POST method
     request.HTTPBody = [bitcoindPayload dataUsingEncoding:NSUTF8StringEncoding];
     request.HTTPMethod = @"POST";
-    //    NSLog(@"request: %@", [request description]);
     
+    // Create the NSURLSessionDataTask to perform the post and handle the response in blocks
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        // Create NSHTTPURLResponse from the NSURLResponse to read the HTTP status codes so we know how to handle errors
         NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+        
+        // If we get a 200, the POST succeseded.  Parse the response JSON and return the success() block
         if (httpResp.statusCode == 200) {
             NSError *jsonError;
             NSDictionary *info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
             success(info);
 //            NSLog(@"info: %@", [info description]);
         }
+        
+        // If we didn't get a 200, find out what the problem is, create an error and return it to the caller.
+        // TODO: Add customer error handling
         else {
             failure(response);
         }
     }];
+    
+    
+    // Kickoff the NSURLSessionDataTask thread
     [postDataTask resume];
 }
+
+
+#pragma mark - Helper methods
 
 - (NSString *)encodeUsernamePassword:(NSString *)username
                             password:(NSString *)password {
