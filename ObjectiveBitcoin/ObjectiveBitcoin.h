@@ -61,6 +61,23 @@ withMinimumConfirmations:(NSNumber *)minconf
 
 ////////////////////////////////////////////////////
 
+-(void)getBalanceForAddress:(NSString *)address
+   withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *balance))success
+                    failure:(void (^)(NSError *error))failure;
+
+-(void)getReceivedByAddress:(NSString *)address
+                    success:(void (^)(NSNumber *balance))success
+                    failure:(void (^)(NSError *error))failure;
+
+-(void)getNewAddress:(void (^)(NSString *address))success
+             failure:(void (^)(NSError *error))failure;
+
+-(void)getNewAddress:(NSString *)account
+             success:(void (^)(NSString *address))success
+             failure:(void (^)(NSError *error))failure;
+
+
 -(void)getPeerInfo:(void (^)(NSArray *peerList))success
                   failure:(void (^)(NSError *error))failure;
 
