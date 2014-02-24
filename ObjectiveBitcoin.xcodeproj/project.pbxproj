@@ -28,7 +28,6 @@
 		07D0067818B02F1B00D68CC8 /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D0067618B02F1B00D68CC8 /* Transaction.m */; };
 		07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFCC189DC22800464FD9 /* Foundation.framework */; };
 		07D006BC18B0682600D68CC8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */; };
-		F5219023F70248BB98D8968D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC1F2CF72DB4DB1AAFBC821 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +80,6 @@
 				07D006BC18B0682600D68CC8 /* SystemConfiguration.framework in Frameworks */,
 				07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */,
 				0743BFCA189DC22800464FD9 /* Cocoa.framework in Frameworks */,
-				F5219023F70248BB98D8968D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
