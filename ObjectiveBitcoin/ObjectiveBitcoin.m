@@ -93,17 +93,24 @@ withMinimumConfirmations:(NSNumber *)minconf
               success:(void (^)(Transaction *transaction))success
               failure:(void (^)(NSError *error))failure {
     
-   }
+  }
 
 -(void)getRawTransaction:(NSString *)transactionId
               success:(void (^)(RawTransaction *rawTransaction))success
               failure:(void (^)(NSError *error))failure {
     
-   }
+}
 
--(void)validateAddress:(NSString *)transactionId
-               success:(void (^)(NSDictionary *addressInfo))success
+-(void)validateAddress:(NSString *)addressString
+               success:(void (^)(BitcoinAddress *address))success
                failure:(void (^)(NSError *error))failure {
-   }
+    [self.bitcoindClient callMethod:@"validateaddress" withParams:@[addressString] success:^(NSDictionary *jsonData) {
+        NSDictionary *addressDict =[jsonData valueForKey:@"result"];
+        BitcoinAddress *address = [[BitcoinAddress alloc] initWithDictionary:addressDict];
+        success(address);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 
 @end

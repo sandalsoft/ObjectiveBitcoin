@@ -18,8 +18,6 @@
 
 
 
-
-
 @interface ObjectiveBitcoin : NSObject
 
 @property BitcoindJSONRPCClient *bitcoindClient;
@@ -30,6 +28,7 @@
      username:(NSString *)username
      password:(NSString *)password;
 
+#pragma mark - bitcoind methods
 
 -(void)getInfo:(void (^)(BitcoindInfo *info))success
        failure:(void (^)(NSError *error))failure;
@@ -37,8 +36,6 @@
 -(void)getAccountAddress:(NSString *)account
               success:(void (^)(BitcoinAddress *address))success
               failure:(void (^)(NSError *error))failure;
-
-
 
 -(void)getBalanceForAccount:(NSString *)account
           success:(void (^)(NSNumber *balance))success
@@ -49,9 +46,6 @@ withMinimumConfirmations:(NSNumber *)minconf
           success:(void (^)(NSNumber *balance))success
           failure:(void (^)(NSError *error))failure;
 
-
-
-
 -(void)getTransaction:(NSString *)transactionId
               success:(void (^)(Transaction *transaction))success
               failure:(void (^)(NSError *error))failure;
@@ -60,8 +54,8 @@ withMinimumConfirmations:(NSNumber *)minconf
               success:(void (^)(RawTransaction *rawTransaction))success
               failure:(void (^)(NSError *error))failure;
 
--(void)validateAddress:(NSString *)transactionId
-               success:(void (^)(NSDictionary *addressInfo))success
+-(void)validateAddress:(NSString *)addressString
+               success:(void (^)(BitcoinAddress *address))success
                failure:(void (^)(NSError *error))failure;
 
 @end

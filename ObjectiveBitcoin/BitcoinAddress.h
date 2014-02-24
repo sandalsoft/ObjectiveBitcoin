@@ -10,10 +10,18 @@
 
 @interface BitcoinAddress : NSObject
 
-@property (strong, nonatomic) NSString *addressString;
+
+@property (strong, nonatomic) NSString *address;
+@property (assign, nonatomic) Boolean isMine;
+@property (strong, nonatomic) NSString *publicKey;
+@property (strong, nonatomic) NSString *account;
+@property (assign, nonatomic) Boolean isScript;
+@property (assign, nonatomic) Boolean isValid;
+@property (assign, nonatomic) Boolean isCompressed;
 
 -(id)initWithString:(NSString *)stringAddress;
--(NSString *)stringValue;
+-(id)initWithDictionary:(NSDictionary *)addressDict;
+
 -(NSString *)description;
 
 @end
