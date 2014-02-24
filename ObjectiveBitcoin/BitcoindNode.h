@@ -24,8 +24,21 @@
 //"banscore" : 0
 
 @property (strong, nonatomic) NSString *addressAndPort;
-@property (strong, nonatomic) NSString *service;
-@property (strong, nonatomic) NSNumber *lastSend;
-@property (strong, nonatomic) NSNumber *lastReceive;
+@property (strong, nonatomic) NSString *services;
+@property (strong, nonatomic) NSDate *lastSend;
+@property (strong, nonatomic) NSDate *lastReceive;
+@property (strong, nonatomic) NSNumber *bytesSent;
+@property (strong, nonatomic) NSNumber *bytesReceived;
+@property (strong, nonatomic) NSDate *ConnectionTime;
+@property (strong, nonatomic) NSNumber *version;
+@property (strong, nonatomic) NSString *subVersion;
+@property (assign, nonatomic) Boolean isInbound;
+@property (strong, nonatomic) NSNumber *startingHeight;
+@property (strong, nonatomic) NSNumber *banScore;
+
+
+-(id)initWithDictionary:(NSDictionary *)nodeDict;
+
+-(NSString *)description;
 
 @end
