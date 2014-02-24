@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07152FC818BBB94E007035A2 /* Account.h in Headers */ = {isa = PBXBuildFile; fileRef = 07152FC618BBB94E007035A2 /* Account.h */; };
+		07152FC918BBB94E007035A2 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 07152FC718BBB94E007035A2 /* Account.m */; };
+		07152FCC18BBC3CF007035A2 /* BitcoindNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 07152FCA18BBC3CF007035A2 /* BitcoindNode.h */; };
+		07152FCD18BBC3CF007035A2 /* BitcoindNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 07152FCB18BBC3CF007035A2 /* BitcoindNode.m */; };
 		0743BFCA189DC22800464FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFC9189DC22800464FD9 /* Cocoa.framework */; };
 		0743BFD4189DC22800464FD9 /* ObjectiveBitcoin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743BFD3189DC22800464FD9 /* ObjectiveBitcoin.m */; };
 		0743BFDB189DC22800464FD9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFDA189DC22800464FD9 /* XCTest.framework */; };
@@ -41,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07152FC618BBB94E007035A2 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		07152FC718BBB94E007035A2 /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
+		07152FCA18BBC3CF007035A2 /* BitcoindNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoindNode.h; sourceTree = "<group>"; };
+		07152FCB18BBC3CF007035A2 /* BitcoindNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoindNode.m; sourceTree = "<group>"; };
 		0743BFC6189DC22800464FD9 /* libObjectiveBitcoin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveBitcoin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0743BFC9189DC22800464FD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0743BFCC189DC22800464FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -146,12 +154,16 @@
 				0743BFD3189DC22800464FD9 /* ObjectiveBitcoin.m */,
 				07745BA718B9078A0096A376 /* BitcoindJSONRPCClient.h */,
 				07745BA818B9078A0096A376 /* BitcoindJSONRPCClient.m */,
+				07152FC618BBB94E007035A2 /* Account.h */,
+				07152FC718BBB94E007035A2 /* Account.m */,
 				07920D0E18BA96630076BE43 /* BitcoinAddress.h */,
 				07920D0F18BA96630076BE43 /* BitcoinAddress.m */,
 				07745BAB18B911E50096A376 /* BitcoindInfo.h */,
 				07745BAC18B911E50096A376 /* BitcoindInfo.m */,
 				0743BFF0189DC27600464FD9 /* BitcoinBlock.h */,
 				0743BFF1189DC27600464FD9 /* BitcoinBlock.m */,
+				07152FCA18BBC3CF007035A2 /* BitcoindNode.h */,
+				07152FCB18BBC3CF007035A2 /* BitcoindNode.m */,
 				0743BFF4189E9B6600464FD9 /* RawTransaction.h */,
 				0743BFF5189E9B6600464FD9 /* RawTransaction.m */,
 				07D0067518B02F1B00D68CC8 /* Transaction.h */,
@@ -195,10 +207,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				07D0067718B02F1B00D68CC8 /* Transaction.h in Headers */,
+				07152FC818BBB94E007035A2 /* Account.h in Headers */,
 				07745BAD18B911E50096A376 /* BitcoindInfo.h in Headers */,
 				07920D1018BA96630076BE43 /* BitcoinAddress.h in Headers */,
 				0743BFF2189DC27600464FD9 /* BitcoinBlock.h in Headers */,
 				0743BFF6189E9B6600464FD9 /* RawTransaction.h in Headers */,
+				07152FCC18BBC3CF007035A2 /* BitcoindNode.h in Headers */,
 				07745BA918B9078A0096A376 /* BitcoindJSONRPCClient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,7 +334,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0743BFF7189E9B6600464FD9 /* RawTransaction.m in Sources */,
+				07152FC918BBB94E007035A2 /* Account.m in Sources */,
 				0743BFD4189DC22800464FD9 /* ObjectiveBitcoin.m in Sources */,
+				07152FCD18BBC3CF007035A2 /* BitcoindNode.m in Sources */,
 				07D0067818B02F1B00D68CC8 /* Transaction.m in Sources */,
 				07920D1118BA96630076BE43 /* BitcoinAddress.m in Sources */,
 				07745BAE18B911E50096A376 /* BitcoindInfo.m in Sources */,

@@ -113,21 +113,21 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
-//-(void)listAccounts:(void (^)(NSArray *))success
-//            failure:(void (^)(NSError *error))failure {
-//    [self.bitcoindClient callMethod:@"listaccounts" withParams:@[] success:^(NSDictionary *jsonData) {
-//        NSDictionary *accountsListDict =[jsonData valueForKey:@"result"];
-//        NSMutableArray *accountsList = [[NSMutableArray alloc] init];
-//        for (NSString *key in accountsListDict) {
+-(void)listAccounts:(void (^)(NSArray *))success
+            failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"listaccounts" withParams:@[] success:^(NSDictionary *jsonData) {
+        NSDictionary *accountsListDict =[jsonData valueForKey:@"result"];
+        NSMutableArray *accountsList = [[NSMutableArray alloc] init];
+        for (NSString *key in accountsListDict) {
 //            NSDictionary *accountsDict = @{key:[accountsListDict valueForKey:key]};
-//            Account *account = [[Account alloc] initWithDictionary:accountsDict];
-//            [accountsList addObject:account];
-//        }
-//        success([[NSArray alloc] initWithArray:[NSArray arrayWithArray:accountsList]]);
-//    } failure:^(NSError *error) {
-//        failure(error);
-//    }];
-//}
+            Account *account = [[Account alloc] initWithName:key WithAmount:[accountsListDict valueForKey:key]];
+            [accountsList addObject:account];
+        }
+        success([[NSArray alloc] initWithArray:[NSArray arrayWithArray:accountsList]]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 
 
 

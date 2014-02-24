@@ -15,7 +15,7 @@
 #import "BitcoindInfo.h"
 #import "BitcoindJSONRPCClient.h"
 #import "BitcoinAddress.h"
-
+#import "Account.h"
 
 
 
@@ -47,16 +47,62 @@ withMinimumConfirmations:(NSNumber *)minconf
           success:(void (^)(NSNumber *balance))success
           failure:(void (^)(NSError *error))failure;
 
+-(void)getReceivedByAccount:(NSString *)account
+                    success:(void (^)(NSNumber *balance))success
+                    failure:(void (^)(NSError *error))failure;
+
 -(void)validateAddress:(NSString *)addressString
                success:(void (^)(BitcoinAddress *address))success
                failure:(void (^)(NSError *error))failure;
 
-//-(void)listAccounts:(void (^)(NSArray *accounts))success
-//       failure:(void (^)(NSError *error))failure;
-
+-(void)listAccounts:(void (^)(NSArray *accounts))success
+       failure:(void (^)(NSError *error))failure;
 
 
 ////////////////////////////////////////////////////
+
+-(void)getPeerInfo:(void (^)(NSArray *peerList))success
+                  failure:(void (^)(NSError *error))failure;
+
+-(void)getAddedNodeInfo:(Boolean)useDNS
+                    success:(void (^)(NSString *blockHash))success
+                    failure:(void (^)(NSError *error))failure;
+
+-(void)getAddedNodeInfo:(Boolean)useDNS
+                   node:(NSString *)nodeString
+                success:(void (^)(NSString *blockHash))success
+                failure:(void (^)(NSError *error))failure;
+
+-(void)getBlock:(NSString *)blockHash
+                    success:(void (^)(BitcoinBlock *block))success
+                    failure:(void (^)(NSError *error))failure;
+
+-(void)getBlockHashForBlock:(NSNumber *)blockNumber
+            success:(void (^)(NSString *blockHash))success
+            failure:(void (^)(NSError *error))failure;
+
+-(void)getBlockCount:(void (^)(NSNumber *blocks))success
+                  failure:(void (^)(NSError *error))failure;
+
+-(void)getConnectionCount:(void (^)(NSNumber *connections))success
+             failure:(void (^)(NSError *error))failure;
+
+-(void)getDifficulty:(void (^)(NSNumber *difficulty))success
+               failure:(void (^)(NSError *error))failure;
+
+-(void)getHashesPerSec:(void (^)(NSNumber *hashesPerSecond))success
+             failure:(void (^)(NSError *error))failure;
+
+-(void)getRawMemPool:(void (^)(NSArray *poolList))success
+             failure:(void (^)(NSError *error))failure;
+
+-(void)getGenerate:(void (^)(Boolean *isGeneratingHashes))success
+             failure:(void (^)(NSError *error))failure;
+
+-(void)getMiningInfo:(void (^)(NSDictionary *miningInfoDict))success
+       failure:(void (^)(NSError *error))failure;
+
+
 -(void)getTransaction:(NSString *)transactionId
               success:(void (^)(Transaction *transaction))success
               failure:(void (^)(NSError *error))failure;
