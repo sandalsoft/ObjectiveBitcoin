@@ -38,11 +38,11 @@
 		07745BAE18B911E50096A376 /* BitcoindInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 07745BAC18B911E50096A376 /* BitcoindInfo.m */; };
 		07920D1018BA96630076BE43 /* BitcoinAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 07920D0E18BA96630076BE43 /* BitcoinAddress.h */; };
 		07920D1118BA96630076BE43 /* BitcoinAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 07920D0F18BA96630076BE43 /* BitcoinAddress.m */; };
+		07CAF55A18BEEDC400A7C3F1 /* Fixtures.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07CAF55918BEEDC400A7C3F1 /* Fixtures.bundle */; };
 		07D0067718B02F1B00D68CC8 /* BitcoinTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D0067518B02F1B00D68CC8 /* BitcoinTransaction.h */; };
 		07D0067818B02F1B00D68CC8 /* BitcoinTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D0067618B02F1B00D68CC8 /* BitcoinTransaction.m */; };
 		07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFCC189DC22800464FD9 /* Foundation.framework */; };
 		07D006BC18B0682600D68CC8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */; };
-		07E3109818BED40000D21361 /* libPods-OHHTTPStubs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E3109718BED40000D21361 /* libPods-OHHTTPStubs.a */; };
 		AA92F7453D0146BA80ADD1F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC1F2CF72DB4DB1AAFBC821 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +95,7 @@
 		07745BAC18B911E50096A376 /* BitcoindInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoindInfo.m; sourceTree = "<group>"; };
 		07920D0E18BA96630076BE43 /* BitcoinAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoinAddress.h; sourceTree = "<group>"; };
 		07920D0F18BA96630076BE43 /* BitcoinAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoinAddress.m; sourceTree = "<group>"; };
+		07CAF55918BEEDC400A7C3F1 /* Fixtures.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Fixtures.bundle; sourceTree = "<group>"; };
 		07D0067518B02F1B00D68CC8 /* BitcoinTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoinTransaction.h; sourceTree = "<group>"; };
 		07D0067618B02F1B00D68CC8 /* BitcoinTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoinTransaction.m; sourceTree = "<group>"; };
 		07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectiveBitcoin.podspec; sourceTree = SOURCE_ROOT; };
@@ -123,7 +124,6 @@
 				0743BFDC189DC22900464FD9 /* Cocoa.framework in Frameworks */,
 				0743BFDF189DC22900464FD9 /* libObjectiveBitcoin.a in Frameworks */,
 				0743BFDB189DC22800464FD9 /* XCTest.framework in Frameworks */,
-				07E3109818BED40000D21361 /* libPods-OHHTTPStubs.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +238,7 @@
 		0743BFE1189DC22900464FD9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				07CAF55918BEEDC400A7C3F1 /* Fixtures.bundle */,
 				07152FEB18BD0912007035A2 /* JSON */,
 				0743BFE2189DC22900464FD9 /* ObjectiveBitcoinTests-Info.plist */,
 				0743BFE3189DC22900464FD9 /* InfoPlist.strings */,
@@ -289,9 +290,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0743BFED189DC22900464FD9 /* Build configuration list for PBXNativeTarget "ObjectiveBitcoinTests" */;
 			buildPhases = (
+				E35FA82A38A142EC84C807C7 /* Check Pods Manifest.lock */,
 				0743BFD5189DC22800464FD9 /* Sources */,
 				0743BFD6189DC22800464FD9 /* Frameworks */,
 				0743BFD7189DC22800464FD9 /* Resources */,
+				D10C3C201D7945999CE367EC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07152FE918BD06CB007035A2 /* validateaddress.json in Resources */,
+				07CAF55A18BEEDC400A7C3F1 /* Fixtures.bundle in Resources */,
 				07152FE518BD06CB007035A2 /* getrawtransaction.json in Resources */,
 				07152FE818BD06CB007035A2 /* listunspent.json in Resources */,
 				07152FE418BD06CB007035A2 /* getpeerinfo.json in Resources */,
@@ -378,6 +382,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D10C3C201D7945999CE367EC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E35FA82A38A142EC84C807C7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -521,6 +555,7 @@
 		};
 		0743BFEE189DC22900464FD9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 425FE78FF73B4764AE68215B /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -545,6 +580,7 @@
 		};
 		0743BFEF189DC22900464FD9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 425FE78FF73B4764AE68215B /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
