@@ -38,7 +38,6 @@
 		07745BAE18B911E50096A376 /* BitcoindInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 07745BAC18B911E50096A376 /* BitcoindInfo.m */; };
 		07920D1018BA96630076BE43 /* BitcoinAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = 07920D0E18BA96630076BE43 /* BitcoinAddress.h */; };
 		07920D1118BA96630076BE43 /* BitcoinAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 07920D0F18BA96630076BE43 /* BitcoinAddress.m */; };
-		07CAF55A18BEEDC400A7C3F1 /* Fixtures.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07CAF55918BEEDC400A7C3F1 /* Fixtures.bundle */; };
 		07D0067718B02F1B00D68CC8 /* BitcoinTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D0067518B02F1B00D68CC8 /* BitcoinTransaction.h */; };
 		07D0067818B02F1B00D68CC8 /* BitcoinTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D0067618B02F1B00D68CC8 /* BitcoinTransaction.m */; };
 		07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFCC189DC22800464FD9 /* Foundation.framework */; };
@@ -95,7 +94,6 @@
 		07745BAC18B911E50096A376 /* BitcoindInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoindInfo.m; sourceTree = "<group>"; };
 		07920D0E18BA96630076BE43 /* BitcoinAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoinAddress.h; sourceTree = "<group>"; };
 		07920D0F18BA96630076BE43 /* BitcoinAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoinAddress.m; sourceTree = "<group>"; };
-		07CAF55918BEEDC400A7C3F1 /* Fixtures.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Fixtures.bundle; sourceTree = "<group>"; };
 		07D0067518B02F1B00D68CC8 /* BitcoinTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoinTransaction.h; sourceTree = "<group>"; };
 		07D0067618B02F1B00D68CC8 /* BitcoinTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoinTransaction.m; sourceTree = "<group>"; };
 		07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectiveBitcoin.podspec; sourceTree = SOURCE_ROOT; };
@@ -238,7 +236,6 @@
 		0743BFE1189DC22900464FD9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				07CAF55918BEEDC400A7C3F1 /* Fixtures.bundle */,
 				07152FEB18BD0912007035A2 /* JSON */,
 				0743BFE2189DC22900464FD9 /* ObjectiveBitcoinTests-Info.plist */,
 				0743BFE3189DC22900464FD9 /* InfoPlist.strings */,
@@ -339,7 +336,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				07152FE918BD06CB007035A2 /* validateaddress.json in Resources */,
-				07CAF55A18BEEDC400A7C3F1 /* Fixtures.bundle in Resources */,
 				07152FE518BD06CB007035A2 /* getrawtransaction.json in Resources */,
 				07152FE818BD06CB007035A2 /* listunspent.json in Resources */,
 				07152FE418BD06CB007035A2 /* getpeerinfo.json in Resources */,

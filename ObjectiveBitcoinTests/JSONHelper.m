@@ -13,6 +13,7 @@
 + (id)dataFromJSONFileNamed:(NSString *)fileName
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+//    NSLog(@"BUNDLE: %@"), [bundle;
     NSString *resource = [bundle pathForResource:fileName ofType:@"json"];
     
     if (NSClassFromString(@"NSJSONSerialization")) {
