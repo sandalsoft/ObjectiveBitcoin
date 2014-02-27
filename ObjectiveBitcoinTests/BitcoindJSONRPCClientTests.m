@@ -17,22 +17,24 @@
 
 @implementation BitcoindJSONRPCClientTests
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     _client = [[BitcoindJSONRPCClient alloc] init];
 }
 
-- (void)tearDown
-{
+- (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testEncodeUsernamePassword
-{
+- (void)testEncodeUsernamePassword {
     XCTAssertTrue([[self.client encodeUsernamePassword:@"u" password:@"p"] isEqualToString:@"dTpw"],@"Base64 Encoded \"u:p\" should equal \"dTpw\"");
 }
 
+
+-(void)testCreateParamsString {
+    
+    
+}
 @end

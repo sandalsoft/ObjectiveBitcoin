@@ -23,8 +23,7 @@
 
 @implementation ObjectiveBitcoinTests
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
 
 
@@ -34,27 +33,24 @@
     NSString *password = @"p";
     
     self.client = [[ObjectiveBitcoin alloc] initWithHost:host port:port username:username password:password];
+    
+}
 
-//    __block NSData *stubData = [[NSData alloc] initWithData:[JSONHelper dataFromJSONFileNamed:@"getinfo"]];
+- (void)tearDown {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [super tearDown];
+    [OHHTTPStubs removeAllStubs];
+    
+}
+
+- (void)testGetInfo {
 
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-//        NSLog(@"request: %@",  request.HTTPBody);
-           return [request.URL.host isEqualToString:@"dev.sndl.io"];
+        return [request.URL.host isEqualToString:@"dev.sndl.io"];
     } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(@"getinfo.json", nil) statusCode:200 headers:nil];
     }];
     
-}
-
-- (void)tearDown
-{
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testGetInfo
-{
-
     TestNeedsToWaitForBlock();
     
     [self.client getInfo:^(BitcoindInfo *info) {
@@ -66,6 +62,29 @@
     }];
 
     WaitForBlock();
+}
+
+- (void)testGetBalance {
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:@"dev.sndl.io"];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(@"getbalance.json", nil) statusCode:200 headers:nil];
+    }];
+    
+    TestNeedsToWaitForBlock();
+    
+    [self.client getBalanceForAccount:@"test" success:^(NSNumber *balance) {
+        NSLog(@"balance: %@", [balance description]);
+        XCTAssertTrue([balance isEqualToNumber:@3.09890000], @"Balance is 3.09890000");
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTAssertNil(@"bewbz", @"In failure block :(");
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
+    
 }
 
 @end
