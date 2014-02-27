@@ -34,7 +34,23 @@
 
 
 -(void)testCreateParamsString {
+//    NSLog(@"params: %@", [self.client createParamsString:@[@"param1", @"param 2", @3]]);
+    NSString *multiParams = [NSString stringWithString:[self.client createParamsString:@[@"param1", @"param 2", @3]]];
+    XCTAssertTrue([multiParams isEqualToString:@"[\"param1\", \"param 2\", 3]"], @"%@ should be equal to \"[\"param1\", \"param 2\", 3]", multiParams);
+    
+    NSString *singleParamString =[NSString stringWithString:[self.client createParamsString:@[@"param1"]]];
+    XCTAssertTrue([singleParamString isEqualToString:@"[\"param1\"]"], @"%@ should be equal to \"[\"param1\"]", singleParamString);
+    
+    
+    NSString *singleParamNumber =[self.client createParamsString:@[@69]] ;
+    XCTAssertTrue([singleParamNumber  isEqualToString:@"[69]"], @"%@ should be equal to [69]", singleParamNumber);
+    
+
+    
+                         
+    
     
     
 }
+
 @end

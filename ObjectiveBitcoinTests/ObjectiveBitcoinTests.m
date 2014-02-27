@@ -75,7 +75,7 @@
     TestNeedsToWaitForBlock();
     
     [self.client getBalanceForAccount:@"test" success:^(NSNumber *balance) {
-        NSLog(@"balance: %@", [balance description]);
+//        NSLog(@"balance: %@", [balance description]);
         XCTAssertTrue([balance isEqualToNumber:@3.09890000], @"Balance is 3.09890000");
         BlockFinished();
     } failure:^(NSError *error) {

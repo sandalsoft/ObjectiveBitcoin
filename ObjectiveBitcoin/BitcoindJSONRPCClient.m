@@ -163,9 +163,11 @@
     [paramsString appendString:@"["];
     
     // If only 1 param, no need to loop, create the string and append the end quote and bracket
-    if ([params count] == 1)
+    if ([params count] == 1 && [params[0] isKindOfClass:[NSString class]])
         [paramsString appendString:[NSString stringWithFormat:@"\"%@\"]", params[0]]];
-    
+    else if ([params count] == 1 && [params[0] isKindOfClass:[NSNumber class]])
+       [paramsString appendString:[NSString stringWithFormat:@"%@]", params[0]]]; 
+       
     // For more than 1 param, loop through params array and append quoted param and comma: "param",
     else {
         for (int param=0; param < [params count]; param++) {
