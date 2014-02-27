@@ -88,7 +88,17 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
-
+-(void)getBlock:(NSString *)blockHash
+        success:(void (^)(BitcoinBlock *))success
+        failure:(void (^)(NSError *))failure {
+    
+    [self.bitcoindClient callMethod:@"getblock" withParams:@[blockHash] success:^(NSDictionary *jsonData) {
+        BitcoinBlock *block = [[BitcoinBlock alloc] initWithDictionary:[jsonData valueForKey:@"result"]];
+        success(block);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 
 -(void)validateAddress:(NSString *)addressString
                success:(void (^)(BitcoinAddress *address))success

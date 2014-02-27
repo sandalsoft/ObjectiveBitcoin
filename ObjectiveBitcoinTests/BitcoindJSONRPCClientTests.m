@@ -35,6 +35,8 @@
  
             TODO:  Add tests that exercise callMethod and test for error codes
  
+                Create tests with failing HTTP status codes to ensure method fails properly
+ 
  
  
  

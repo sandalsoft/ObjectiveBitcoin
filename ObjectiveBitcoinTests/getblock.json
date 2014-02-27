@@ -1,16 +1,18 @@
-    "hash" : "00000000000000006dfe44404056582e67a2a79f288a158f3d9ce9464567762e",
-    "confirmations" : 1,
-    "size" : 248866,
-    "height" : 283613,
-    "version" : 2,
-    "merkleroot" : "5262010b417c7d59c5b629f557d26bec3141c12274f585aa3be317086d347b99",
-    "tx" : [
-            "7a91c5cc8b929d0ac15fc0991aaeb96dbb935e01697045e5addc5efa02f5c79a",
-            "18cdccece3867471d6299605ee051bfc5b0e14754765bf1a5fab1eab830cb7fe",
-            "..."
-            ],
-    "time" : 1391276748,
-    "nonce" : 2090153581,
-    "bits" : "1901f52c",
-    "difficulty" : 2193847870.17427921,
-    "previousblockhash" : "00000000000000018a49aa5e02d8e115bbb5aed236ce663103c71bf3ddb0bb41"
+{
+    "result": {
+        "hash": "00000000f275c4a72eb44e2385d4ac0acb5760b111fc335c5c400945cbc3bba5",
+        "confirmations": 1,
+        "size": 190,
+        "height": 193346,
+        "version": 2,
+        "merkleroot": "635e24a91208170cf73904b6ce2a528aeaaec551d4fa458860ab5adbd90336f4",
+        "tx": ["635e24a91208170cf73904b6ce2a528aeaaec551d4fa458860ab5adbd90336f4"],
+        "time": 1393522565,
+        "nonce": 399567616,
+        "bits": "1d00ffff",
+        "difficulty": 1.00000000,
+        "previousblockhash": "000000000016186b97566de34b0547799ff4fbc1da65056a060822204bcce9f2"
+    },
+    "error": null,
+    "id": "OHHTTPStubs Test"
+}
