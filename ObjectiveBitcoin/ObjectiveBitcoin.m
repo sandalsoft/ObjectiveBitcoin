@@ -8,7 +8,6 @@
 
 #import "ObjectiveBitcoin.h"
 
-
 @implementation ObjectiveBitcoin
 
 // init function instantiates BitcoindJSONRPCClient singleton.  We accept parameters needed to setup the client to make calls once, and reuse that instance.
@@ -89,17 +88,7 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
--(void)getTransaction:(NSString *)transactionId
-              success:(void (^)(Transaction *transaction))success
-              failure:(void (^)(NSError *error))failure {
-    
-  }
 
--(void)getRawTransaction:(NSString *)transactionId
-              success:(void (^)(RawTransaction *rawTransaction))success
-              failure:(void (^)(NSError *error))failure {
-    
-}
 
 -(void)validateAddress:(NSString *)addressString
                success:(void (^)(BitcoinAddress *address))success
@@ -129,6 +118,56 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
+-(void)getTransaction:(NSString *)transactionId
+              success:(void (^)(BitcoinTransaction *transaction))success
+              failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"gettransaction" withParams:@[transactionId] success:^(NSDictionary *jsonData) {
+         NSDictionary *transactionDict =[jsonData valueForKey:@"result"];
+        BitcoinTransaction *transaction = [[BitcoinTransaction alloc] initWithDictionary:transactionDict];
+        success(transaction);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    
+}
 
+-(void)getRawTransaction:(NSString *)transactionId
+                 success:(void (^)(BitcoinRawTransaction *rawTransaction))success
+                 failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"getrawtransaction" withParams:@[transactionId] success:^(NSDictionary *jsonData) {
+        NSDictionary *rawTransactionDict =[jsonData valueForKey:@"result"];
+        BitcoinRawTransaction *rawTransaction = [[BitcoinRawTransaction alloc] initWithDictionary:rawTransactionDict];
+        success(rawTransaction);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void)getNewAddress:(void (^)(BitcoinAddress *address))success
+             failure:(void (^)(NSError *error))failure {
+    [self getNewAddress:@"" success:^(BitcoinAddress *address) {
+        success(address);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    
+}
+
+-(void)getNewAddress:(NSString *)account
+             success:(void (^)(BitcoinAddress *address))success
+             failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"getnewaddress" withParams:@[account] success:^(NSDictionary *jsonData) {
+        BitcoinAddress *address = [[BitcoinAddress alloc] init];
+        address.address = [jsonData valueForKey:@"result"];
+        address.isMine = YES;
+        address.isValid = YES;
+        address.account = account;
+        success(address);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    
+}
 
 @end
+

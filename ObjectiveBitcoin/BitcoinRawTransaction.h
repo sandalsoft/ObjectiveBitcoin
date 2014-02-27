@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RawTransaction : NSObject
+@interface BitcoinRawTransaction : NSObject
 
 @property (strong, nonatomic) NSString *hex;
 @property (strong, nonatomic) NSString *transactionId;

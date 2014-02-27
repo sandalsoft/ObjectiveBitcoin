@@ -1,0 +1,30 @@
+[
+    {
+        "addr" : "144.76.133.145:18333",
+        "services" : "00000001",
+        "lastsend" : 1393265666,
+        "lastrecv" : 1393265666,
+        "bytessent" : 7571130,
+        "bytesrecv" : 3128851,
+        "conntime" : 1393017799,
+        "version" : 70001,
+        "subver" : "/Satoshi:0.8.99/",
+        "inbound" : false,
+        "startingheight" : 190784,
+        "banscore" : 0
+    },
+    {
+        "addr" : "54.215.172.225:18333",
+        "services" : "00000001",
+        "lastsend" : 1393265666,
+        "lastrecv" : 1393265666,
+        "bytessent" : 7654638,
+        "bytesrecv" : 3937195,
+        "conntime" : 1393017800,
+        "version" : 70001,
+        "subver" : "/Satoshi:0.8.3/",
+        "inbound" : false,
+        "startingheight" : 190784,
+        "banscore" : 0
+    },
+  ]

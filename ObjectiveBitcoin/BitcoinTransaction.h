@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Transaction : NSObject
-
+@interface BitcoinTransaction : NSObject
 
 @property (strong, nonatomic) NSNumber *amount;
 @property (strong, nonatomic) NSNumber *confirmations;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Sandalsoft. All rights reserved.
 //
 
-#import "RawTransaction.h"
+#import "BitcoinRawTransaction.h"
 
-@implementation RawTransaction
+@implementation BitcoinRawTransaction
 
 
 - (id)initWithDictionary:(NSDictionary *)rawTransactionDict {

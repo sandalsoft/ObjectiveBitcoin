@@ -7,6 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "JSONHelper.h"
+
+#import "ObjectiveBitcoin.h"
 
 @interface ObjectiveBitcoinTests : XCTestCase
 
@@ -26,9 +29,14 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testGetInfo
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    
+    NSData *data = [[NSData alloc] initWithData:[JSONHelper dataFromJSONFileNamed:@"getinfo"]];
+    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSDictionary *infoDict = [[NSDictionary alloc] initWithDictionary:[jsonData objectForKey:@"result"]];
+    NSLog(@"infoDict: %@", infoDict);
+    XCTAssertNil(nil, @"hi");
 }
 
 @end

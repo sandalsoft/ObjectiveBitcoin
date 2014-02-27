@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Sandalsoft. All rights reserved.
 //
 
-#import "Transaction.h"
+#import "BitcoinTransaction.h"
 
-@implementation Transaction
+@implementation BitcoinTransaction
 
 
 

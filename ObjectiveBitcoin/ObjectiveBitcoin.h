@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
-#import "Transaction.h"
-#import "RawTransaction.h"
+#import "BitcoinTransaction.h"
+#import "BitcoinRawTransaction.h"
 #import "BitcoinBlock.h"
 #import "BitcoindInfo.h"
 #import "BitcoindJSONRPCClient.h"
@@ -58,8 +58,25 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)listAccounts:(void (^)(NSArray *accounts))success
        failure:(void (^)(NSError *error))failure;
 
+-(void)getTransaction:(NSString *)transactionId
+              success:(void (^)(BitcoinTransaction *transaction))success
+              failure:(void (^)(NSError *error))failure;
+
+-(void)getRawTransaction:(NSString *)transactionId
+                 success:(void (^)(BitcoinRawTransaction *rawTransaction))success
+                 failure:(void (^)(NSError *error))failure;
+
+-(void)getNewAddress:(void (^)(BitcoinAddress *address))success
+             failure:(void (^)(NSError *error))failure;
+
+-(void)getNewAddress:(NSString *)account
+             success:(void (^)(BitcoinAddress *address))success
+             failure:(void (^)(NSError *error))failure;
+
 
 ////////////////////////////////////////////////////
+
+
 
 -(void)getBalanceForAddress:(NSString *)address
    withMinimumConfirmations:(NSNumber *)minconf
@@ -70,13 +87,10 @@ withMinimumConfirmations:(NSNumber *)minconf
                     success:(void (^)(NSNumber *balance))success
                     failure:(void (^)(NSError *error))failure;
 
--(void)getNewAddress:(void (^)(NSString *address))success
-             failure:(void (^)(NSError *error))failure;
-
--(void)getNewAddress:(NSString *)account
-             success:(void (^)(NSString *address))success
-             failure:(void (^)(NSError *error))failure;
-
+-(void)getReceivedByAddress:(NSString *)address
+   withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *balance))success
+                    failure:(void (^)(NSError *error))failure;
 
 -(void)getPeerInfo:(void (^)(NSArray *peerList))success
                   failure:(void (^)(NSError *error))failure;
@@ -120,13 +134,7 @@ withMinimumConfirmations:(NSNumber *)minconf
        failure:(void (^)(NSError *error))failure;
 
 
--(void)getTransaction:(NSString *)transactionId
-              success:(void (^)(Transaction *transaction))success
-              failure:(void (^)(NSError *error))failure;
 
--(void)getRawTransaction:(NSString *)transactionId
-              success:(void (^)(RawTransaction *rawTransaction))success
-              failure:(void (^)(NSError *error))failure;
 
 
 @end
