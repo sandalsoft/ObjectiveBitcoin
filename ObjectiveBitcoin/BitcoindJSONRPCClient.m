@@ -41,6 +41,14 @@
     
 }
 
+/**
+ *  Proxy method to interface with bitcoind JSON RPC server.  The method and params passed in are used to contruct a NSURLSession and NSMutableURLRequest.  The NSMutableURLRequest sets the proper authentication headers and constructs the HTTP POST body for the bitcoind method passed in
+ *
+ *  @param methodName Bitcoind method to call
+ *  @param params     Paramters to bitcoind method
+ *  @param success    Success block returns NSDictionary of JSON containing return data from bitcoind
+ *  @param failure    Failure block with NSError
+ */
 - (void)callMethod:(NSString *)methodName
         withParams:(NSArray *)params
            success:(void (^)(NSDictionary *jsonData))success
@@ -139,6 +147,14 @@
 
 #pragma mark - Helper methods
 
+/**
+ *  Base64 Encodes username and password so it can be passed in the authentication header.  HTTP Basic Auth requires the username and password be concatenated with a : between, then base64 encoded.  This is required for HTTP Basic authentication that bitcoind uses. See http://en.wikipedia.org/wiki/Basic_access_authentication#Client_side for details
+ *
+ *  @param username bitcoind username
+ *  @param password bitcoind password
+ *
+ *  @return NSString of base64 encoded username and password
+ */
 - (NSString *)encodeUsernamePassword:(NSString *)username
                             password:(NSString *)password {
     NSString *plainString = [NSString stringWithFormat:@"%@:%@", username, password];
@@ -149,6 +165,13 @@
 }
 
 
+/**
+ *  Creates string from NSArray of parameteres.  Because bitcoind expects method arguments in JSON format in the HTTP POST body, we must construct a JSON string from an array of parameters with all of the appropriate quotes for strings and such.
+ *
+ *  @param params NSArray of parameters to send to bitcoind method
+ *
+ *  @return String of JSON encoded params
+ */
 - (NSString *)createParamsString:(NSArray *)params {
     // If no paras, return empty JSON brackets
     

@@ -24,6 +24,16 @@
 @property BitcoindJSONRPCClient *bitcoindClient;
 
 
+/**
+ *  Instantiates BitcoindJSONRPCClient singleton.  Accepts parameters needed to setup the shared BitcoindJSONRPCClient client that can be resused.
+ *
+ *  @param host     Host running bitcoind
+ *  @param port     The port bitcoind is listening on.  8332 for production, 18332 for testnet
+ *  @param username The username to bitcoind is configured to allow access
+ *  @param password The password for the username
+ *
+ *  @return a BitcoindJSONRPCClient singleton
+ */
 -(id)initWithHost:(NSString *)host
          port:(NSString *)port
      username:(NSString *)username
@@ -31,9 +41,24 @@
 
 #pragma mark - bitcoind methods
 
+/**
+ *  Returns info about running bitcoind instance.  Bitcoind method: getinfo
+ *
+ *
+ *  @param success Success block with BitcoindInfo object
+ *  @param failure Failure block with NSError
+ */
 -(void)getInfo:(void (^)(BitcoindInfo *info))success
        failure:(void (^)(NSError *error))failure;
 
+
+/**
+ *  Returns current bitcoin address for receiving payments to this account.  Bitcoind method: getaccountaddress
+ *
+ *  @param account The account string to get address for
+ *  @param success Success block with BitcoinAddress object
+ *  @param failure Failure block with NSError
+ */
 -(void)getAccountAddress:(NSString *)account
               success:(void (^)(BitcoinAddress *address))success
               failure:(void (^)(NSError *error))failure;
@@ -46,6 +71,7 @@
 withMinimumConfirmations:(NSNumber *)minconf
           success:(void (^)(NSNumber *balance))success
           failure:(void (^)(NSError *error))failure;
+
 
 -(void)getReceivedByAccount:(NSString *)account
                     success:(void (^)(NSNumber *balance))success

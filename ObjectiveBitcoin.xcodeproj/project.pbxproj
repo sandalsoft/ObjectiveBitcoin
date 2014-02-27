@@ -274,6 +274,7 @@
 				0743BFC3189DC22800464FD9 /* Frameworks */,
 				0743BFC4189DC22800464FD9 /* Headers */,
 				9A632B48F3A144F6A2450529 /* Copy Pods Resources */,
+				07F6A3BA18BFA15B00A0DD32 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -353,6 +354,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		07F6A3BA18BFA15B00A0DD32 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#if [ ${CONFIGURATION} == \"Release\" ]; then\nAPPLEDOC_PATH=/usr/local/bin/appledoc\nif [ $APPLEDOC_PATH ]; then\n\ntouch ${PRODUCT_NAME}test\n\n$APPLEDOC_PATH \\\n--project-name ${PRODUCT_NAME} \\\n--project-company \"Eric Nelson\" \\\n--company-id \"com.sandalsoft\" \\\n--output ${PRODUCT_NAME}Docs \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n${PROJECT_DIR}/${PRODUCT_NAME}\nfi;\n#fi;";
+		};
 		382A1DBD27404992A7B8F48F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

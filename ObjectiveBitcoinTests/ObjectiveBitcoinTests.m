@@ -49,7 +49,7 @@
         return [request.URL.host isEqualToString:@"dev.sndl.io"];
     } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(@"getinfo.json", nil) statusCode:200 headers:nil];
-    }];
+    }].name = @"Stub for testGetInfo";
     
     TestNeedsToWaitForBlock();
     
@@ -70,7 +70,7 @@
         return [request.URL.host isEqualToString:@"dev.sndl.io"];
     } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(@"getbalance.json", nil) statusCode:200 headers:nil];
-    }];
+    }].name = @"Stub for testGetBalance";
     
     TestNeedsToWaitForBlock();
     
