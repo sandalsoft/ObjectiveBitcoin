@@ -99,6 +99,13 @@ withMinimumConfirmations:(NSNumber *)minconf
                     failure:(void (^)(NSError *error))failure;
 
 
+/**
+ *  Determines if an address is valid and if it is owned by this wallet.  Returns details of the address
+ *
+ *  @param addressString Bitcoin address string
+ *  @param success       Success block with details of the address
+ *  @param failure       Failure block with NSError
+ */
 -(void)validateAddress:(NSString *)addressString
                success:(void (^)(BitcoinAddress *address))success
                failure:(void (^)(NSError *error))failure;

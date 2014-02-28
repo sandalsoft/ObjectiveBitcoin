@@ -64,7 +64,7 @@
 
 
 - (void)testGetBalance {
-    NSString *stubDataFileName = @"getbalance.json";
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
     
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
         return [request.URL.host isEqualToString:self.OHTTPStubHostString];
@@ -78,7 +78,7 @@
         XCTAssertTrue([balance isEqualToNumber:@3.09890000], @"Balance should equal 3.09890000");
         BlockFinished();
     } failure:^(NSError *error) {
-        XCTAssertNil(@"bewbz", @"In failure block :(");
+        XCTFail(@"Failure");
         BlockFinished();
     }];
     
@@ -86,7 +86,7 @@
 }
 
 - (void)testGetBlock {
-    NSString *stubDataFileName = @"getblock.json";
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
     
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
         return [request.URL.host isEqualToString:self.OHTTPStubHostString];
@@ -100,7 +100,7 @@
         XCTAssertTrue([block.height isEqualToNumber:@193346], @"Block Height should equal 193346");
         BlockFinished();
     } failure:^(NSError *error) {
-        XCTAssertNil(@"bewbz", @"In failure block :(");
+        XCTFail(@"Failure");
         BlockFinished();
     }];
     
@@ -108,7 +108,7 @@
 }
 
 - (void)testGetInfo {
-    NSString *stubDataFileName = @"getinfo.json";
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
     
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
         return [request.URL.host isEqualToString:self.OHTTPStubHostString];
@@ -122,7 +122,7 @@
         XCTAssertTrue([info.blocks isEqualToNumber:@666666], @"getInfo.Blocks should be 666666");
         BlockFinished();
     } failure:^(NSError *error) {
-        XCTAssertNil(@"bewbz", @"In failure block :(");
+        XCTFail(@"Failure");
         BlockFinished();
     }];
     
@@ -130,7 +130,7 @@
 }
 
 - (void)testGetReceivedByAccount {
-    NSString *stubDataFileName = @"getreceivedbyaccount.json";
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
     
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
         return [request.URL.host isEqualToString:self.OHTTPStubHostString];
@@ -144,13 +144,34 @@
         XCTAssertTrue([balance isEqualToNumber:@1.60000000], @"%@ should be 1.60000000", balance);
         BlockFinished();
     } failure:^(NSError *error) {
-        XCTAssertNil(@"bewbz", @"In failure block :(");
+        XCTFail(@"Failure");
         BlockFinished();
     }];
     
     WaitForBlock();
 }
 
+- (void)testValidateAddress {
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+    
+    [self.client validateAddress:self.bitcoinAddress success:^(BitcoinAddress *address) {
+        XCTAssertTrue([address.publicKey isEqualToString:@"03bcc6688da1e9921e4291826fd58f1748c1992ae2dbf55cd57aa2295ee5aede27"], @"%@ should be 03bcc6688da1e9921e4291826fd58f1748c1992ae2dbf55cd57aa2295ee5aede27", address.publicKey);
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTFail(@"Failure");
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
 
+}
 
 @end
