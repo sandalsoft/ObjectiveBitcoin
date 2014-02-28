@@ -92,6 +92,14 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getBlockCount:(void (^)(NSNumber *blockCount))success
              failure:(void (^)(NSError *error))failure;
 
+/**
+ *  Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+ *
+ *  @param success Success block returning the difficulty as a NSNumber
+ *  @param failure Failure block returning NSError
+ */
+-(void)getDifficulty:(void (^)(NSNumber *difficulty))success
+             failure:(void (^)(NSError *error))failure;
 
 /**
  *  Returns a recent hashes per second performance measurement while generating.  If not generating hashes, 0 is returned.
@@ -165,8 +173,6 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getReceivedByAddress:(NSString *)address
                     success:(void (^)(NSNumber *balance))success
                     failure:(void (^)(NSError *error))failure;
-
-
 
 
 
@@ -257,8 +263,7 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getConnectionCount:(void (^)(NSNumber *connections))success
              failure:(void (^)(NSError *error))failure;
 
--(void)getDifficulty:(void (^)(NSNumber *difficulty))success
-               failure:(void (^)(NSError *error))failure;
+
 
 
 

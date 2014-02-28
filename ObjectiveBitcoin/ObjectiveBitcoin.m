@@ -100,6 +100,14 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
     
 }
+-(void)getDifficulty:(void (^)(NSNumber *))success
+             failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"getdifficulty" withParams:@[] success:^(NSDictionary *jsonData) {
+        success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 
 -(void)getHashesPerSecond:(void (^)(NSNumber *))success
                   failure:(void (^)(NSError *))failure {
