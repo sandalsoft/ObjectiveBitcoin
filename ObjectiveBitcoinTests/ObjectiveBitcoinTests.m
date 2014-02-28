@@ -147,6 +147,31 @@
     WaitForBlock();
 }
 
+- (void)testListAccounts {
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+    
+    [self.client listAccounts:^(NSArray *accounts) {
+        Account *account = [[Account alloc] init];
+        account = accounts[1];
+        XCTAssertTrue([account.name isEqualToString:@"test"], @"%@ is equal to test", account.name);
+        XCTAssertTrue([account.balance isEqualToNumber:@1.6000000], @"%@ is equal to 1.6000000", account.balance);
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTFail(@"Failure");
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
+}
+
 - (void)testValidateAddress {
     NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
     
@@ -169,29 +194,6 @@
     WaitForBlock();
 }
 
-- (void)testListAccounts {
-    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
-    
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
-    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
-        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
-    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
-    
-    TestNeedsToWaitForBlock();
 
-    [self.client listAccounts:^(NSArray *accounts) {
-        Account *account = [[Account alloc] init];
-        account = accounts[1];
-        XCTAssertTrue([account.name isEqualToString:@"test"], @"%@ is equal to test", account.name);
-        XCTAssertTrue([account.balance isEqualToNumber:@1.6000000], @"%@ is equal to 1.6000000", account.balance);
-        BlockFinished();
-    } failure:^(NSError *error) {
-        XCTFail(@"Failure");
-        BlockFinished();
-    }];
-    
-    WaitForBlock();
-}
 
 @end

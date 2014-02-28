@@ -42,6 +42,17 @@
 #pragma mark - bitcoind methods
 
 /**
+ *  Returns details of the block of the hash input
+ *
+ *  @param blockHash Hash of block to get details of
+ *  @param success   Success block with details of block in BitcoinBlock object
+ *  @param failure   Failure block with NSError
+ */
+-(void)getBlock:(NSString *)blockHash
+        success:(void (^)(BitcoinBlock *block))success
+        failure:(void (^)(NSError *error))failure;
+
+/**
  *  Returns info about running bitcoind instance.  Bitcoind method: getinfo
  *
  *
@@ -119,6 +130,7 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)listAccounts:(void (^)(NSArray *accounts))success
        failure:(void (^)(NSError *error))failure;
 
+
 -(void)getTransaction:(NSString *)transactionId
               success:(void (^)(BitcoinTransaction *transaction))success
               failure:(void (^)(NSError *error))failure;
@@ -138,21 +150,24 @@ withMinimumConfirmations:(NSNumber *)minconf
 ////////////////////////////////////////////////////
 
 
-
+// Has stub
 -(void)getBalanceForAddress:(NSString *)address
    withMinimumConfirmations:(NSNumber *)minconf
                     success:(void (^)(NSNumber *balance))success
                     failure:(void (^)(NSError *error))failure;
 
+// Has stub
 -(void)getReceivedByAddress:(NSString *)address
                     success:(void (^)(NSNumber *balance))success
                     failure:(void (^)(NSError *error))failure;
 
+// Has stub
 -(void)getReceivedByAddress:(NSString *)address
    withMinimumConfirmations:(NSNumber *)minconf
                     success:(void (^)(NSNumber *balance))success
                     failure:(void (^)(NSError *error))failure;
 
+// Has stub
 -(void)getPeerInfo:(void (^)(NSArray *peerList))success
                   failure:(void (^)(NSError *error))failure;
 
@@ -165,9 +180,7 @@ withMinimumConfirmations:(NSNumber *)minconf
                 success:(void (^)(NSString *blockHash))success
                 failure:(void (^)(NSError *error))failure;
 
--(void)getBlock:(NSString *)blockHash
-                    success:(void (^)(BitcoinBlock *block))success
-                    failure:(void (^)(NSError *error))failure;
+
 
 -(void)getBlockHashForBlock:(NSNumber *)blockNumber
             success:(void (^)(NSString *blockHash))success
