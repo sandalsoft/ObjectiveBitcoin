@@ -62,27 +62,6 @@
     
 }
 
-- (void)testGetInfo {
-    NSString *stubDataFileName = @"getinfo.json";
-    
-    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
-    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
-        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
-    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
-    
-    TestNeedsToWaitForBlock();
-    
-    [self.client getInfo:^(BitcoindInfo *info) {
-        XCTAssertTrue([info.blocks isEqualToNumber:@666666], @"getInfo.Blocks should be 666666");
-        BlockFinished();
-    } failure:^(NSError *error) {
-        XCTAssertNil(@"bewbz", @"In failure block :(");
-        BlockFinished();
-    }];
-
-    WaitForBlock();
-}
 
 - (void)testGetBalance {
     NSString *stubDataFileName = @"getbalance.json";
@@ -104,7 +83,6 @@
     }];
     
     WaitForBlock();
-    
 }
 
 - (void)testGetBlock {
@@ -127,6 +105,52 @@
     }];
     
     WaitForBlock();
-
 }
+
+- (void)testGetInfo {
+    NSString *stubDataFileName = @"getinfo.json";
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+    
+    [self.client getInfo:^(BitcoindInfo *info) {
+        XCTAssertTrue([info.blocks isEqualToNumber:@666666], @"getInfo.Blocks should be 666666");
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTAssertNil(@"bewbz", @"In failure block :(");
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
+}
+
+- (void)testGetReceivedByAccount {
+    NSString *stubDataFileName = @"getreceivedbyaccount.json";
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+    
+    [self.client getReceivedByAccount:@"test" success:^(NSNumber *balance) {
+        XCTAssertTrue([balance isEqualToNumber:@1.60000000], @"%@ should be 1.60000000", balance);
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTAssertNil(@"bewbz", @"In failure block :(");
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
+}
+
+
+
 @end

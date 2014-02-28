@@ -93,6 +93,7 @@
                 
             //  Authentication Error
             case 401: {
+                
                 NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
                                            NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Unauthorized.", nil),
                                            NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"Make sure the username and password is valid.", nil),
@@ -114,10 +115,13 @@
                 
             // Server Error
             case 500: {
+                NSDictionary *bitcoindErrorDict = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil] valueForKey:@"error"];
+            
                     NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
                                                NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Server Error.", nil),
-                                               NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"HTTP 500 Error.  This is usually a problem with the HTTP POST body, or the bitcoind daemon you're hitting has problems.  If you think this is a problem with the HTTP POST, send email to eric@sndl.io with details", nil),
-                                               @"HTTP Response":NSLocalizedString([httpResponse description], nil)};
+                                               NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"HTTP 500 Error.  This can be a problem with the HTTP POST body, or more likely, bitcoind is returning an error.  If you think this is a problem with the HTTP POST, please file a bug", nil),
+                                               @"HTTP Response":NSLocalizedString([httpResponse description], nil),
+                                               @"Bitcoind Error":[bitcoindErrorDict description]};
                     
                 NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:httpResponse.statusCode userInfo:userInfo];
                     failure(error);

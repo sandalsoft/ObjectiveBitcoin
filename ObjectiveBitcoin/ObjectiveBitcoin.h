@@ -63,6 +63,7 @@
               success:(void (^)(BitcoinAddress *address))success
               failure:(void (^)(NSError *error))failure;
 
+
 -(void)getBalanceForAccount:(NSString *)account
           success:(void (^)(NSNumber *balance))success
           failure:(void (^)(NSError *error))failure;
@@ -73,9 +74,30 @@ withMinimumConfirmations:(NSNumber *)minconf
           failure:(void (^)(NSError *error))failure;
 
 
+/**
+ *  Returns the total amount received by addresses in the specified account in transactions with at least 1 confirmation. If account not provided return will include all transactions to all accounts.
+ *
+ *  @param account Account name
+ *  @param success Success block with the amount
+ *  @param failure Failure block with NSError
+ */
 -(void)getReceivedByAccount:(NSString *)account
-                    success:(void (^)(NSNumber *balance))success
+                    success:(void (^)(NSNumber *amount))success
                     failure:(void (^)(NSError *error))failure;
+
+/**
+ *  eturns the total amount received by addresses in the specified account in transactions with at least x confirmations. If account not provided return will include all transactions to all accounts.
+ *
+ *  @param account Account name
+ *  @param minconf Number of minimum confirmations
+ *  @param success Success block with the amount
+ *  @param failure Failure block with NSError
+ */
+-(void)getReceivedByAccount:(NSString *)account
+   withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *amount))success
+                    failure:(void (^)(NSError *error))failure;
+
 
 -(void)validateAddress:(NSString *)addressString
                success:(void (^)(BitcoinAddress *address))success

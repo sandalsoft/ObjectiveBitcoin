@@ -75,7 +75,7 @@ withMinimumConfirmations:(NSNumber *)minconf
         account = @"";
     
     if (!minconf)
-        minconf = 0;
+        minconf = @0;
     
     [self.bitcoindClient callMethod:@"getbalance" withParams:@[account, minconf] success:^(NSDictionary *jsonData) {
         
@@ -99,6 +99,45 @@ withMinimumConfirmations:(NSNumber *)minconf
         failure(error);
     }];
 }
+
+-(void)getReceivedByAccount:(NSString *)account
+                    success:(void (^)(NSNumber *))success
+                    failure:(void (^)(NSError *))failure {
+    
+    // Be defensive about incoming params.  account could be nil
+    if (!account)
+        account = @"";
+    
+    [self getReceivedByAccount:account withMinimumConfirmations:[NSNumber numberWithInt:1] success:^(NSNumber *balance) {
+        success(balance);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+
+-(void)getReceivedByAccount:(NSString *)account
+   withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *))success
+                    failure:(void (^)(NSError *))failure {
+    
+    // Be defensive about incoming params.  account could be nil
+    if (!account)
+        account = @"";
+    
+    if (!minconf)
+        minconf = @1;
+    
+    [self.bitcoindClient callMethod:@"getreceivedbyaccount" withParams:@[account, minconf] success:^(NSDictionary *jsonData) {
+        
+        NSNumber *balance = [jsonData valueForKey:@"result"];
+        success(balance);
+        
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 
 -(void)validateAddress:(NSString *)addressString
                success:(void (^)(BitcoinAddress *address))success
@@ -178,6 +217,7 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
     
 }
+
 
 @end
 
