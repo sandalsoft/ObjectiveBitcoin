@@ -26,16 +26,6 @@
 
 
 #pragma mark - bitciond methods
--(void)getInfo:(void (^)(BitcoindInfo *info))success
-       failure:(void (^)(NSError *error))failure {
-    
-    [self.bitcoindClient callMethod:@"getinfo" withParams:@[] success:^(NSDictionary *jsonData) {
-        NSDictionary *infoDict = [[NSDictionary alloc] initWithDictionary:[jsonData objectForKey:RESULT_BITCOIND_JSON_KEY]];
-        success([[BitcoindInfo alloc] initWithDictionary:infoDict]);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
-}
 
 -(void)getAccountAddress:(NSString *)account
                  success:(void (^)(BitcoinAddress *address))success
@@ -110,6 +100,28 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
     
 }
+
+-(void)getHashesPerSecond:(void (^)(NSNumber *))success
+                  failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"gethashespersec" withParams:@[] success:^(NSDictionary *jsonData) {
+        success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void)getInfo:(void (^)(BitcoindInfo *info))success
+       failure:(void (^)(NSError *error))failure {
+    
+    [self.bitcoindClient callMethod:@"getinfo" withParams:@[] success:^(NSDictionary *jsonData) {
+        NSDictionary *infoDict = [[NSDictionary alloc] initWithDictionary:[jsonData objectForKey:RESULT_BITCOIND_JSON_KEY]];
+        success([[BitcoindInfo alloc] initWithDictionary:infoDict]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+
 -(void)getNewAddress:(NSString *)account
              success:(void (^)(BitcoinAddress *address))success
              failure:(void (^)(NSError *error))failure {

@@ -84,6 +84,26 @@ withMinimumConfirmations:(NSNumber *)minconf
         failure:(void (^)(NSError *error))failure;
 
 /**
+ *  Returns the number of blocks in the longest block chain.
+ *
+ *  @param success Success block returning NSNumer of blocks
+ *  @param failure Failure block returning NSError
+ */
+-(void)getBlockCount:(void (^)(NSNumber *blockCount))success
+             failure:(void (^)(NSError *error))failure;
+
+
+/**
+ *  Returns a recent hashes per second performance measurement while generating.  If not generating hashes, 0 is returned.
+ *
+ *  @param success Success block returning the number of hashes per second or 0 if not generating
+ *  @param failure Failure block returning NSError
+ */
+-(void)getHashesPerSecond:(void (^)(NSNumber *hashesPerSecond))success
+               failure:(void (^)(NSError *error))failure;
+
+
+/**
  *  Returns info about running bitcoind instance.  Bitcoind method: getinfo
  *
  *  @param success Success block returning BitcoindInfo object
@@ -216,8 +236,7 @@ withMinimumConfirmations:(NSNumber *)minconf
             success:(void (^)(NSString *blockHash))success
             failure:(void (^)(NSError *error))failure;
 
--(void)getBlockCount:(void (^)(NSNumber *blockCount))success
-                  failure:(void (^)(NSError *error))failure;
+
 
 -(void)getConnectionCount:(void (^)(NSNumber *connections))success
              failure:(void (^)(NSError *error))failure;
@@ -225,8 +244,7 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getDifficulty:(void (^)(NSNumber *difficulty))success
                failure:(void (^)(NSError *error))failure;
 
--(void)getHashesPerSec:(void (^)(NSNumber *hashesPerSecond))success
-             failure:(void (^)(NSError *error))failure;
+
 
 -(void)getRawMemPool:(void (^)(NSArray *poolList))success
              failure:(void (^)(NSError *error))failure;

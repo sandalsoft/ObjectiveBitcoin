@@ -99,7 +99,7 @@
     TestNeedsToWaitForBlock();
     
     [self.client getBlock:@"00000000f275c4a72eb44e2385d4ac0acb5760b111fc335c5c400945cbc3bba5" success:^(BitcoinBlock *block) {
-        XCTAssertTrue([block.height isEqualToNumber:@193346], @"Block Height should equal 193346");
+        XCTAssertTrue([block.height isEqualToNumber:@193346], @"%@ should equal to 193346", block.height);
         BlockFinished();
     } failure:^(NSError *error) {
         XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
@@ -107,6 +107,30 @@
     }];
     
     WaitForBlock();
+}
+- (void)testGetHashesPerSecond {
+    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+    
+    [self.client getHashesPerSecond:^(NSNumber *hashesPerSecond) {
+        XCTAssertTrue([hashesPerSecond isEqualToNumber:@69], @"%@ should be equal to 69", hashesPerSecond);
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
+
+    
 }
 
 - (void)testGetInfo {
@@ -122,7 +146,7 @@
     TestNeedsToWaitForBlock();
     
     [self.client getInfo:^(BitcoindInfo *info) {
-        XCTAssertTrue([info.blocks isEqualToNumber:@666666], @"getInfo.Blocks should be 666666");
+        XCTAssertTrue([info.blocks isEqualToNumber:@666666], @"%@ should be equal to 666666", info.blocks );
         BlockFinished();
     } failure:^(NSError *error) {
         XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));

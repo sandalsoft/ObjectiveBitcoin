@@ -27,6 +27,7 @@
 		07253EB218C051AA00689FD2 /* getblockcount.json in Resources */ = {isa = PBXBuildFile; fileRef = 07253EB118C051AA00689FD2 /* getblockcount.json */; };
 		07253EB518C053AF00689FD2 /* Contstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 07253EB318C053AF00689FD2 /* Contstants.h */; };
 		07253EB618C053AF00689FD2 /* Contstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 07253EB418C053AF00689FD2 /* Contstants.m */; };
+		07253EB818C0587F00689FD2 /* gethashespersecond.json in Resources */ = {isa = PBXBuildFile; fileRef = 07253EB718C0587F00689FD2 /* gethashespersecond.json */; };
 		0743BFCA189DC22800464FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFC9189DC22800464FD9 /* Cocoa.framework */; };
 		0743BFD4189DC22800464FD9 /* ObjectiveBitcoin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743BFD3189DC22800464FD9 /* ObjectiveBitcoin.m */; };
 		0743BFDB189DC22800464FD9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFDA189DC22800464FD9 /* XCTest.framework */; };
@@ -84,6 +85,7 @@
 		07253EB118C051AA00689FD2 /* getblockcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getblockcount.json; sourceTree = "<group>"; };
 		07253EB318C053AF00689FD2 /* Contstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contstants.h; sourceTree = "<group>"; };
 		07253EB418C053AF00689FD2 /* Contstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contstants.m; sourceTree = "<group>"; };
+		07253EB718C0587F00689FD2 /* gethashespersecond.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gethashespersecond.json; sourceTree = "<group>"; };
 		0743BFC6189DC22800464FD9 /* libObjectiveBitcoin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveBitcoin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0743BFC9189DC22800464FD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0743BFCC189DC22800464FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -161,6 +163,7 @@
 				07253EA718C01F2300689FD2 /* getreceivedbyaccount.json */,
 				07253EA918C01F4600689FD2 /* getreceivedbyaccount_test_9999999.json */,
 				07253EB118C051AA00689FD2 /* getblockcount.json */,
+				07253EB718C0587F00689FD2 /* gethashespersecond.json */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				07CAF55F18BF09C600A7C3F1 /* getbalance_test_1.json in Resources */,
 				07CAF56018BF09C600A7C3F1 /* getbalance.json in Resources */,
 				07253EAA18C01F4600689FD2 /* getreceivedbyaccount_test_9999999.json in Resources */,
+				07253EB818C0587F00689FD2 /* gethashespersecond.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
