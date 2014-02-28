@@ -37,7 +37,7 @@
  
                 Create tests with failing HTTP status codes to ensure method fails properly
  
- 
+                Create test that checks bitcoind error response JSON for null
  
  
  */

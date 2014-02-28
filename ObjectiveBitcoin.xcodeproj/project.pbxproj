@@ -24,6 +24,9 @@
 		07253EAA18C01F4600689FD2 /* getreceivedbyaccount_test_9999999.json in Resources */ = {isa = PBXBuildFile; fileRef = 07253EA918C01F4600689FD2 /* getreceivedbyaccount_test_9999999.json */; };
 		07253EAC18C02CEB00689FD2 /* getnewaddress.json in Resources */ = {isa = PBXBuildFile; fileRef = 07253EAB18C02CEB00689FD2 /* getnewaddress.json */; };
 		07253EAE18C02DE600689FD2 /* getreceivedbyaddress.json in Resources */ = {isa = PBXBuildFile; fileRef = 07253EAD18C02DE600689FD2 /* getreceivedbyaddress.json */; };
+		07253EB218C051AA00689FD2 /* getblockcount.json in Resources */ = {isa = PBXBuildFile; fileRef = 07253EB118C051AA00689FD2 /* getblockcount.json */; };
+		07253EB518C053AF00689FD2 /* Contstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 07253EB318C053AF00689FD2 /* Contstants.h */; };
+		07253EB618C053AF00689FD2 /* Contstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 07253EB418C053AF00689FD2 /* Contstants.m */; };
 		0743BFCA189DC22800464FD9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFC9189DC22800464FD9 /* Cocoa.framework */; };
 		0743BFD4189DC22800464FD9 /* ObjectiveBitcoin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0743BFD3189DC22800464FD9 /* ObjectiveBitcoin.m */; };
 		0743BFDB189DC22800464FD9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFDA189DC22800464FD9 /* XCTest.framework */; };
@@ -78,6 +81,9 @@
 		07253EA918C01F4600689FD2 /* getreceivedbyaccount_test_9999999.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getreceivedbyaccount_test_9999999.json; sourceTree = "<group>"; };
 		07253EAB18C02CEB00689FD2 /* getnewaddress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getnewaddress.json; sourceTree = "<group>"; };
 		07253EAD18C02DE600689FD2 /* getreceivedbyaddress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getreceivedbyaddress.json; sourceTree = "<group>"; };
+		07253EB118C051AA00689FD2 /* getblockcount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getblockcount.json; sourceTree = "<group>"; };
+		07253EB318C053AF00689FD2 /* Contstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contstants.h; sourceTree = "<group>"; };
+		07253EB418C053AF00689FD2 /* Contstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contstants.m; sourceTree = "<group>"; };
 		0743BFC6189DC22800464FD9 /* libObjectiveBitcoin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveBitcoin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0743BFC9189DC22800464FD9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0743BFCC189DC22800464FD9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -154,6 +160,7 @@
 				07152FE118BD06CB007035A2 /* validateaddress.json */,
 				07253EA718C01F2300689FD2 /* getreceivedbyaccount.json */,
 				07253EA918C01F4600689FD2 /* getreceivedbyaccount_test_9999999.json */,
+				07253EB118C051AA00689FD2 /* getblockcount.json */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -205,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */,
+				07253EB318C053AF00689FD2 /* Contstants.h */,
+				07253EB418C053AF00689FD2 /* Contstants.m */,
 				0743BFD2189DC22800464FD9 /* ObjectiveBitcoin.h */,
 				0743BFD3189DC22800464FD9 /* ObjectiveBitcoin.m */,
 				07745BA718B9078A0096A376 /* BitcoindJSONRPCClient.h */,
@@ -266,6 +275,7 @@
 				07D0067718B02F1B00D68CC8 /* BitcoinTransaction.h in Headers */,
 				07152FC818BBB94E007035A2 /* Account.h in Headers */,
 				07745BAD18B911E50096A376 /* BitcoindInfo.h in Headers */,
+				07253EB518C053AF00689FD2 /* Contstants.h in Headers */,
 				07920D1018BA96630076BE43 /* BitcoinAddress.h in Headers */,
 				0743BFF2189DC27600464FD9 /* BitcoinBlock.h in Headers */,
 				0743BFF6189E9B6600464FD9 /* BitcoinRawTransaction.h in Headers */,
@@ -350,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07253EA818C01F2300689FD2 /* getreceivedbyaccount.json in Resources */,
+				07253EB218C051AA00689FD2 /* getblockcount.json in Resources */,
 				07152FE918BD06CB007035A2 /* validateaddress.json in Resources */,
 				07152FE518BD06CB007035A2 /* getrawtransaction.json in Resources */,
 				07152FE818BD06CB007035A2 /* listunspent.json in Resources */,
@@ -454,6 +465,7 @@
 				07152FC918BBB94E007035A2 /* Account.m in Sources */,
 				0743BFD4189DC22800464FD9 /* ObjectiveBitcoin.m in Sources */,
 				07152FCD18BBC3CF007035A2 /* BitcoindNode.m in Sources */,
+				07253EB618C053AF00689FD2 /* Contstants.m in Sources */,
 				07D0067818B02F1B00D68CC8 /* BitcoinTransaction.m in Sources */,
 				07920D1118BA96630076BE43 /* BitcoinAddress.m in Sources */,
 				07745BAE18B911E50096A376 /* BitcoindInfo.m in Sources */,

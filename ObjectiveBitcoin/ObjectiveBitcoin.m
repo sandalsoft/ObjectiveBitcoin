@@ -30,7 +30,7 @@
        failure:(void (^)(NSError *error))failure {
     
     [self.bitcoindClient callMethod:@"getinfo" withParams:@[] success:^(NSDictionary *jsonData) {
-        NSDictionary *infoDict = [[NSDictionary alloc] initWithDictionary:[jsonData objectForKey:@"result"]];
+        NSDictionary *infoDict = [[NSDictionary alloc] initWithDictionary:[jsonData objectForKey:RESULT_BITCOIND_JSON_KEY]];
         success([[BitcoindInfo alloc] initWithDictionary:infoDict]);
     } failure:^(NSError *error) {
         failure(error);
@@ -42,7 +42,7 @@
                  failure:(void (^)(NSError *error))failure {
     
     [self.bitcoindClient callMethod:@"getaccountaddress" withParams:@[account] success:^(NSDictionary *jsonData) {
-        NSString *addressString = [jsonData valueForKey:@"result"];
+        NSString *addressString = [jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
         BitcoinAddress *address = [[BitcoinAddress alloc] initWithString:addressString];
         success(address);
     } failure:^(NSError *error) {
@@ -79,7 +79,7 @@ withMinimumConfirmations:(NSNumber *)minconf
     
     [self.bitcoindClient callMethod:@"getbalance" withParams:@[account, minconf] success:^(NSDictionary *jsonData) {
         
-        NSNumber *balance = [jsonData valueForKey:@"result"];
+        NSNumber *balance = [jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
         success(balance);
         
         
@@ -92,9 +92,47 @@ withMinimumConfirmations:(NSNumber *)minconf
         success:(void (^)(BitcoinBlock *))success
         failure:(void (^)(NSError *))failure {
     
-    [self.bitcoindClient callMethod:@"getblock" withParams:@[blockHash] success:^(NSDictionary *jsonData) {
-        BitcoinBlock *block = [[BitcoinBlock alloc] initWithDictionary:[jsonData valueForKey:@"result"]];
+    [self.bitcoindClient callMethod:GETBLOCK_BITCOIND_METHOD withParams:@[blockHash] success:^(NSDictionary *jsonData) {
+        BitcoinBlock *block = [[BitcoinBlock alloc] initWithDictionary:[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]];
         success(block);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+
+-(void)getBlockCount:(void (^)(NSNumber *))success
+             failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"getblockcount" withParams:@[] success:^(NSDictionary *jsonData) {
+        success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    
+}
+-(void)getNewAddress:(NSString *)account
+             success:(void (^)(BitcoinAddress *address))success
+             failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"getnewaddress" withParams:@[account] success:^(NSDictionary *jsonData) {
+        BitcoinAddress *address = [[BitcoinAddress alloc] init];
+        address.address = [jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
+        address.isMine = YES;
+        address.isValid = YES;
+        address.account = account;
+        success(address);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    
+}
+
+-(void)getRawTransaction:(NSString *)transactionId
+                 success:(void (^)(BitcoinRawTransaction *rawTransaction))success
+                 failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"getrawtransaction" withParams:@[transactionId, @1] success:^(NSDictionary *jsonData) {
+        NSDictionary *rawTransactionDict =[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
+        BitcoinRawTransaction *rawTransaction = [[BitcoinRawTransaction alloc] initWithDictionary:rawTransactionDict];
+        success(rawTransaction);
     } failure:^(NSError *error) {
         failure(error);
     }];
@@ -130,7 +168,7 @@ withMinimumConfirmations:(NSNumber *)minconf
     
     [self.bitcoindClient callMethod:@"getreceivedbyaccount" withParams:@[account, minconf] success:^(NSDictionary *jsonData) {
         
-        NSNumber *balance = [jsonData valueForKey:@"result"];
+        NSNumber *balance = [jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
         success(balance);
         
     } failure:^(NSError *error) {
@@ -139,39 +177,11 @@ withMinimumConfirmations:(NSNumber *)minconf
 }
 
 
--(void)validateAddress:(NSString *)addressString
-               success:(void (^)(BitcoinAddress *address))success
-               failure:(void (^)(NSError *error))failure {
-    [self.bitcoindClient callMethod:@"validateaddress" withParams:@[addressString] success:^(NSDictionary *jsonData) {
-        NSDictionary *addressDict =[jsonData valueForKey:@"result"];
-        BitcoinAddress *address = [[BitcoinAddress alloc] initWithDictionary:addressDict];
-        success(address);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
-}
-
--(void)listAccounts:(void (^)(NSArray *))success
-            failure:(void (^)(NSError *error))failure {
-    [self.bitcoindClient callMethod:@"listaccounts" withParams:@[] success:^(NSDictionary *jsonData) {
-        NSDictionary *accountsListDict =[jsonData valueForKey:@"result"];
-        NSMutableArray *accountsList = [[NSMutableArray alloc] init];
-        for (NSString *key in accountsListDict) {
-//            NSDictionary *accountsDict = @{key:[accountsListDict valueForKey:key]};
-            Account *account = [[Account alloc] initWithName:key WithAmount:[accountsListDict valueForKey:key]];
-            [accountsList addObject:account];
-        }
-        success([[NSArray alloc] initWithArray:[NSArray arrayWithArray:accountsList]]);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
-}
-
 -(void)getTransaction:(NSString *)transactionId
               success:(void (^)(BitcoinTransaction *transaction))success
               failure:(void (^)(NSError *error))failure {
     [self.bitcoindClient callMethod:@"gettransaction" withParams:@[transactionId] success:^(NSDictionary *jsonData) {
-         NSDictionary *transactionDict =[jsonData valueForKey:@"result"];
+         NSDictionary *transactionDict =[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
         BitcoinTransaction *transaction = [[BitcoinTransaction alloc] initWithDictionary:transactionDict];
         success(transaction);
     } failure:^(NSError *error) {
@@ -180,17 +190,6 @@ withMinimumConfirmations:(NSNumber *)minconf
     
 }
 
--(void)getRawTransaction:(NSString *)transactionId
-                 success:(void (^)(BitcoinRawTransaction *rawTransaction))success
-                 failure:(void (^)(NSError *error))failure {
-    [self.bitcoindClient callMethod:@"getrawtransaction" withParams:@[transactionId] success:^(NSDictionary *jsonData) {
-        NSDictionary *rawTransactionDict =[jsonData valueForKey:@"result"];
-        BitcoinRawTransaction *rawTransaction = [[BitcoinRawTransaction alloc] initWithDictionary:rawTransactionDict];
-        success(rawTransaction);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
-}
 
 -(void)getNewAddress:(void (^)(BitcoinAddress *address))success
              failure:(void (^)(NSError *error))failure {
@@ -202,21 +201,35 @@ withMinimumConfirmations:(NSNumber *)minconf
     
 }
 
--(void)getNewAddress:(NSString *)account
-             success:(void (^)(BitcoinAddress *address))success
-             failure:(void (^)(NSError *error))failure {
-    [self.bitcoindClient callMethod:@"getnewaddress" withParams:@[account] success:^(NSDictionary *jsonData) {
-        BitcoinAddress *address = [[BitcoinAddress alloc] init];
-        address.address = [jsonData valueForKey:@"result"];
-        address.isMine = YES;
-        address.isValid = YES;
-        address.account = account;
+
+-(void)listAccounts:(void (^)(NSArray *))success
+            failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"listaccounts" withParams:@[] success:^(NSDictionary *jsonData) {
+        NSDictionary *accountsListDict =[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
+        NSMutableArray *accountsList = [[NSMutableArray alloc] init];
+        for (NSString *key in accountsListDict) {
+            //            NSDictionary *accountsDict = @{key:[accountsListDict valueForKey:key]};
+            Account *account = [[Account alloc] initWithName:key WithAmount:[accountsListDict valueForKey:key]];
+            [accountsList addObject:account];
+        }
+        success([[NSArray alloc] initWithArray:[NSArray arrayWithArray:accountsList]]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void)validateAddress:(NSString *)addressString
+               success:(void (^)(BitcoinAddress *address))success
+               failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"validateaddress" withParams:@[addressString] success:^(NSDictionary *jsonData) {
+        NSDictionary *addressDict =[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
+        BitcoinAddress *address = [[BitcoinAddress alloc] initWithDictionary:addressDict];
         success(address);
     } failure:^(NSError *error) {
         failure(error);
     }];
-    
 }
+
 
 
 @end

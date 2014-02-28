@@ -1,18 +1,24 @@
 {
-    "amount" : 0.00111000,
-    "confirmations" : 2,
-    "blockhash" : "0000000000000000f1a69c3fa2a8935379fc9238c2917b809180aba7d86da472",
-    "blockindex" : 11,
-    "blocktime" : 1392506387,
-    "txid" : "29ebaa7868b43e735b6e9ea97407d7cde8b4d941e75ed64365520373adda1b35",
-    "time" : 1392506264,
-    "timereceived" : 1392506264,
-    "details" : [
-        {
-            "account" : "myaccount",
-            "address" : "1EyPhR3iBdnQ3tCuXpX1DKEHeg8735frLh",
-            "category" : "receive",
-            "amount" : 0.00111000
-        }
-    ]
+    "result": {
+        "amount": -0.00100000,
+        "fee": -0.00010000,
+        "confirmations": 11534,
+        "blockhash": "00000000002af84e6d6006cfd6d3174943ea973b19eb2886990381c1522e6572",
+        "blockindex": 2,
+        "blocktime": 1392514191,
+        "txid": "2f24129724113d6dd82fc2ea61d68665661d93318b922c3098167954cb4141c9",
+        "time": 1392513742,
+        "timereceived": 1392513742,
+        "comment": "this is aocmment",
+        "to": "comment to field",
+        "details": [{
+                    "account": "",
+                    "address": "mimoZNLcP2rrMRgdeX5PSnR7AjCqQveZZ4",
+                    "category": "send",
+                    "amount": -0.00100000,
+                    "fee": -0.00010000
+                    }]
+    },
+    "error": null,
+    "id": "curltest"
 }

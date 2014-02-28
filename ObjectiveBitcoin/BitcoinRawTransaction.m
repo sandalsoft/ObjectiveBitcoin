@@ -18,7 +18,7 @@
         _version = [rawTransactionDict valueForKey:@"version"];
         _lockTime = [rawTransactionDict valueForKey:@"locktime"];
         _vIn = [rawTransactionDict valueForKey:@"vin"];
-        _vOut = [rawTransactionDict valueForKey:@""];
+        _vOut = [rawTransactionDict valueForKey:@"vout"];
         _blockHash = [rawTransactionDict valueForKey:@"blockhash"];
         _confirmations = [rawTransactionDict valueForKey:@"confirmations"];
         _time = [rawTransactionDict valueForKey:@"time"];

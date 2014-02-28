@@ -87,7 +87,25 @@
             // If we get a 200, the POST succeseded.  Parse the response JSON into a NSDictionary and return the success() block
             case 200: {
                 NSDictionary *info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                success(info);
+                
+                // If the error response from bitcoind is null, return the successful bitcoind response.
+                if ([[info valueForKey:@"error"] isKindOfClass:[NSNull class]]) 
+                    success(info);
+
+                // If we get a 200 but bitcoind returns an error object,return the error object.
+                // This shouldn't happen.  Bitcoind should return a 500 if there's an error.
+                else {
+                    NSDictionary *bitcoindErrorDict = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil] valueForKey:@"error"];
+                    
+                    NSDictionary *userInfo = @{NSLocalizedDescriptionKey:NSLocalizedString(@"Operation was unsuccessful.", nil),
+                                               NSLocalizedFailureReasonErrorKey:NSLocalizedString(@"Bitcoind Error.", nil),
+                                               NSLocalizedRecoverySuggestionErrorKey:NSLocalizedString(@"bitcoind is returning an error.  And a HTTP 200.  This isn't supposed to happen.  Probably a bug in bitcoind.  Whatevs", nil),
+                                               @"HTTP Response":NSLocalizedString([httpResponse description], nil),
+                                               @"Bitcoind Error":[bitcoindErrorDict description]};
+                    
+                    NSError *error = [NSError errorWithDomain:[NSString stringWithFormat:@"ObjectiveBitcoin.BitcoindJSONRPCCLient.%@", methodName] code:httpResponse.statusCode userInfo:userInfo];
+                    failure(error);
+                }
                 break;
             }
                 
