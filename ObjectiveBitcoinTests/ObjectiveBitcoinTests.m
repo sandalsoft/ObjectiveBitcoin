@@ -201,10 +201,32 @@
         BlockFinished();
     }];
 
-    
     WaitForBlock();
 }
 
+- (void)testGetReceivedByAddress {
+    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+
+    [self.client getReceivedByAddress:self.bitcoinAddress success:^(NSNumber *balance) {
+        XCTAssertTrue([balance isEqualToNumber:@6.90000000], @"%@ should be equal to 6.90000000", balance);
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
+    
+}
 - (void)testGetTransaction {
     // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
     NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];

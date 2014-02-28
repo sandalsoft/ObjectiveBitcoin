@@ -147,6 +147,29 @@ withMinimumConfirmations:(NSNumber *)minconf
                     success:(void (^)(NSNumber *amount))success
                     failure:(void (^)(NSError *error))failure;
 
+
+/**
+ *  Returns the amount received by <bitcoinaddress> in transactions with at least [minconf] confirmations. It correctly handles the case where someone has sent to the address in multiple transactions. Keep in mind that addresses are only ever used for receiving transactions. Works only for addresses in the local wallet, external addresses will always show 0.
+ *
+ *  @param address Address you want to know how much has been received
+ *  @param minconf Only add transaction if it has this many minimum confirmations
+ *  @param success Success block returning NSNumber amount of total bitcoins received by this address with the minimum confirmations
+ *  @param failure Failure block returning NSError
+ */
+-(void)getReceivedByAddress:(NSString *)address
+   withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *balance))success
+                    failure:(void (^)(NSError *error))failure;
+
+
+-(void)getReceivedByAddress:(NSString *)address
+                    success:(void (^)(NSNumber *balance))success
+                    failure:(void (^)(NSError *error))failure;
+
+
+
+
+
 /**
  *  eturns the total amount received by addresses in the specified account in transactions with at least x confirmations. If account not provided return will include all transactions to all accounts.
  *
@@ -210,22 +233,7 @@ withMinimumConfirmations:(NSNumber *)minconf
 #pragma mark - unimplemented
 
 
-// Has stub
--(void)getBalanceForAddress:(NSString *)address
-   withMinimumConfirmations:(NSNumber *)minconf
-                    success:(void (^)(NSNumber *balance))success
-                    failure:(void (^)(NSError *error))failure;
 
-// Has stub
--(void)getReceivedByAddress:(NSString *)address
-                    success:(void (^)(NSNumber *balance))success
-                    failure:(void (^)(NSError *error))failure;
-
-// Has stub
--(void)getReceivedByAddress:(NSString *)address
-   withMinimumConfirmations:(NSNumber *)minconf
-                    success:(void (^)(NSNumber *balance))success
-                    failure:(void (^)(NSError *error))failure;
 
 
 

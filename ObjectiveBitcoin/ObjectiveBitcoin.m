@@ -203,6 +203,33 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
+-(void)getReceivedByAddress:(NSString *)address
+                    success:(void (^)(NSNumber *))success
+                    failure:(void (^)(NSError *))failure {
+    [self getReceivedByAddress:address withMinimumConfirmations:@1 success:^(NSNumber *balance) {
+        success(balance);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void)getReceivedByAddress:(NSString *)address
+   withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *))success
+                    failure:(void (^)(NSError *))failure {
+    // Be defensive about incoming params.  address could be nil
+    if (!address)
+        address = @"";
+    
+    if (!minconf)
+        minconf = @1;
+
+    [self.bitcoindClient callMethod:@"getreceivedbyaddress" withParams:@[address] success:^(NSDictionary *jsonData) {
+        success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 
 -(void)getTransaction:(NSString *)transactionId
               success:(void (^)(BitcoinTransaction *transaction))success
