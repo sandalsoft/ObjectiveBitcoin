@@ -11,7 +11,7 @@
 @interface Account : NSObject
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSNumber *amount;
+@property (strong, nonatomic) NSNumber *balance;
 
 -(id)initWithName:(NSString *)name
        WithAmount:(NSNumber *)amount;

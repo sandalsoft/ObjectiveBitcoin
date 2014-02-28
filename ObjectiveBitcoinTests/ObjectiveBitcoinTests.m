@@ -17,7 +17,6 @@
 @interface ObjectiveBitcoinTests : XCTestCase
 
 @property (strong, nonatomic) ObjectiveBitcoin *client;
-
 @property (strong, nonatomic) NSString *OHTTPStubHostString;
 
 @property (strong, nonatomic) NSString *host;
@@ -28,8 +27,6 @@
 @property (strong, nonatomic) NSString *accountName;
 @property (strong, nonatomic) NSString *bitcoinAddress;
 
-
-
 @end
 
 @implementation ObjectiveBitcoinTests
@@ -37,7 +34,6 @@
 - (void)setUp {
     [super setUp];
 
-    
     // Setup properties of bitcoind RPC Client and params to send methods for testing.  These params should be valid -testnet values.
     self.OHTTPStubHostString = @"dev.sndl.io";
     self.host = @"http://dev.sndl.io";
@@ -171,7 +167,31 @@
     }];
     
     WaitForBlock();
+}
 
+- (void)testListAccounts {
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+
+    [self.client listAccounts:^(NSArray *accounts) {
+        Account *account = [[Account alloc] init];
+        account = accounts[1];
+        XCTAssertTrue([account.name isEqualToString:@"test"], @"%@ is equal to test", account.name);
+        XCTAssertTrue([account.balance isEqualToNumber:@1.6000000], @"%@ is equal to 1.6000000", account.balance);
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTFail(@"Failure");
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
 }
 
 @end

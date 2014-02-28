@@ -110,6 +110,12 @@ withMinimumConfirmations:(NSNumber *)minconf
                success:(void (^)(BitcoinAddress *address))success
                failure:(void (^)(NSError *error))failure;
 
+/**
+ *  Lists accounts and balances for each
+ *
+ *  @param success Success block with array of Account objects
+ *  @param failure Faulure block with NSError
+ */
 -(void)listAccounts:(void (^)(NSArray *accounts))success
        failure:(void (^)(NSError *error))failure;
 

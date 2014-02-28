@@ -10,20 +10,18 @@
 
 @implementation Account
 
-
-//@property (strong, nonatomic) NSString *name;
-//@property (strong, nonatomic) NSNumber *amount;
-
 -(id)initWithName:(NSString *)name
        WithAmount:(NSNumber *)amount {
 
     self = [super init];
     if (self) {
         _name = name;
-        _amount = amount;
+        _balance = amount;
     }
     return self;
 }
 
-
+-(NSString *)description {
+    return [NSString stringWithFormat:@"Name: %@\n Balance: %@\n", self.name, self.balance];
+}
 @end
