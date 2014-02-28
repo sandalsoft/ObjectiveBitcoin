@@ -16,7 +16,7 @@
 #import "BitcoindJSONRPCClient.h"
 #import "BitcoinAddress.h"
 #import "Account.h"
-
+#import "BitcoindNode.h"
 
 
 @interface ObjectiveBitcoin : NSObject
@@ -126,6 +126,16 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getNewAddress:(void (^)(BitcoinAddress *address))success
              failure:(void (^)(NSError *error))failure;
 
+
+/**
+ *  Returns data about each connected BitcoincNode
+ *
+ *  @param success Success block returning NSArray of BitcoindNode objects
+ *  @param failure Faiure block returning NSError
+ */
+-(void)getPeerInfo:(void (^)(NSArray *peerList))success
+           failure:(void (^)(NSError *error))failure;
+
 /**
  *  Returns the total amount received by addresses in the specified account in transactions with at least 1 confirmation. If account not provided return will include all transactions to all accounts.
  *
@@ -217,9 +227,7 @@ withMinimumConfirmations:(NSNumber *)minconf
                     success:(void (^)(NSNumber *balance))success
                     failure:(void (^)(NSError *error))failure;
 
-// Has stub
--(void)getPeerInfo:(void (^)(NSArray *peerList))success
-                  failure:(void (^)(NSError *error))failure;
+
 
 -(void)getAddedNodeInfo:(Boolean)useDNS
                     success:(void (^)(NSString *blockHash))success

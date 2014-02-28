@@ -121,6 +121,21 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
+-(void)getPeerInfo:(void (^)(NSArray *))success
+           failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"getpeerinfo" withParams:@[] success:^(NSDictionary *jsonData) {
+        NSArray *peerInfo = [[NSArray alloc] initWithArray:[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]];
+        NSMutableArray *peerList = [[NSMutableArray alloc] init];
+        for (NSDictionary *nodeDict in peerInfo) {
+            BitcoindNode *node = [[BitcoindNode alloc] initWithDictionary:nodeDict];
+            [peerList addObject:node];
+        }
+        success(peerList);
+
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 
 -(void)getNewAddress:(NSString *)account
              success:(void (^)(BitcoinAddress *address))success

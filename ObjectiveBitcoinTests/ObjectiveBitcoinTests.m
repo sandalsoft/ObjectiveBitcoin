@@ -129,8 +129,6 @@
     }];
     
     WaitForBlock();
-
-    
 }
 
 - (void)testGetInfo {
@@ -147,6 +145,31 @@
     
     [self.client getInfo:^(BitcoindInfo *info) {
         XCTAssertTrue([info.blocks isEqualToNumber:@666666], @"%@ should be equal to 666666", info.blocks );
+        BlockFinished();
+    } failure:^(NSError *error) {
+        XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+        BlockFinished();
+    }];
+    
+    WaitForBlock();
+}
+
+-(void)testGetPeerInfo {
+    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+    NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+    [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+    } withStubResponse:^OHHTTPStubsResponse*(NSURLRequest *request) {
+        return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+    }].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+    TestNeedsToWaitForBlock();
+
+    [self.client getPeerInfo:^(NSArray *peerList) {
+        BitcoindNode *node = [[BitcoindNode alloc] init];
+        node = peerList[1];
+        XCTAssertTrue([node.bytesReceived isEqualToNumber:@75199], @"%@ should be equal to 75199", node.bytesReceived);
         BlockFinished();
     } failure:^(NSError *error) {
         XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
