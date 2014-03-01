@@ -27,17 +27,16 @@
 
 #pragma mark - bitciond methods
 
--(void)getAccountAddress:(NSString *)account
-                 success:(void (^)(BitcoinAddress *address))success
-                 failure:(void (^)(NSError *error))failure {
-    
-    [self.bitcoindClient callMethod:@"getaccountaddress" withParams:@[account] success:^(NSDictionary *jsonData) {
-        NSString *addressString = [jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
-        BitcoinAddress *address = [[BitcoinAddress alloc] initWithString:addressString];
-        success(address);
-    } failure:^(NSError *error) {
-        failure(error);
-    }];
+- (void)getAccountAddress:(NSString *)account
+                  success:(void (^)(BitcoinAddress *address))success
+                  failure:(void (^)(NSError *error))failure {
+	[self.bitcoindClient callMethod:@"getaccountaddress" withParams:@[account] success: ^(NSDictionary *jsonData) {
+	    NSString *addressString = [jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
+	    BitcoinAddress *address = [[BitcoinAddress alloc] initWithString:addressString];
+	    success(address);
+	} failure: ^(NSError *error) {
+	    failure(error);
+	}];
 }
 
 -(void)getBalanceForAccount:(NSString *)account
@@ -74,6 +73,7 @@ withMinimumConfirmations:(NSNumber *)minconf
         
         
     } failure:^(NSError *error) {
+        NSLog(@"Getbalance Error: %@", error);
         failure(error);
     }];
 }
@@ -90,7 +90,6 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
-
 -(void)getBlockCount:(void (^)(NSNumber *))success
              failure:(void (^)(NSError *))failure {
     [self.bitcoindClient callMethod:@"getblockcount" withParams:@[] success:^(NSDictionary *jsonData) {
@@ -100,10 +99,35 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
     
 }
+
+-(void)getConnectionCount:(void (^)(NSNumber *))success
+                  failure:(void (^)(NSError *))failure {
+    
+    [self.bitcoindClient callMethod:@"getconnectioncount" withParams:@[] success:^(NSDictionary *jsonData) {
+        success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 -(void)getDifficulty:(void (^)(NSNumber *))success
              failure:(void (^)(NSError *))failure {
     [self.bitcoindClient callMethod:@"getdifficulty" withParams:@[] success:^(NSDictionary *jsonData) {
         success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void)getGenerate:(void (^)(BOOL))success
+           failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"getgenerate" withParams:@[] success:^(NSDictionary *jsonData) {
+        BOOL isGeneratingHashes; // =(BOOL)[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
+        if ([[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY] boolValue] == YES)
+//if([isSuccessNumber boolValue] == YES)
+            isGeneratingHashes = YES;
+        else
+            isGeneratingHashes = NO;
+        success(isGeneratingHashes);
     } failure:^(NSError *error) {
         failure(error);
     }];

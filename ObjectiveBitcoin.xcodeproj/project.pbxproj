@@ -52,6 +52,8 @@
 		07D0067818B02F1B00D68CC8 /* BitcoinTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D0067618B02F1B00D68CC8 /* BitcoinTransaction.m */; };
 		07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFCC189DC22800464FD9 /* Foundation.framework */; };
 		07D006BC18B0682600D68CC8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */; };
+		07E9589A18C251C9001E7FFA /* getgenerate.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E9589918C251C9001E7FFA /* getgenerate.json */; };
+		07FEF6FE18C24E39007D1FA4 /* getconnectioncount.json in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF6FD18C24E39007D1FA4 /* getconnectioncount.json */; };
 		AA92F7453D0146BA80ADD1F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC1F2CF72DB4DB1AAFBC821 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +120,8 @@
 		07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectiveBitcoin.podspec; sourceTree = SOURCE_ROOT; };
 		07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		07E3109718BED40000D21361 /* libPods-OHHTTPStubs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OHHTTPStubs.a"; path = "../../../../Library/Developer/Xcode/DerivedData/ObjectiveBitcoin-bvtqsoqqlgkwwbbgdgsvdfuptere/Build/Products/Debug/libPods-OHHTTPStubs.a"; sourceTree = "<group>"; };
+		07E9589918C251C9001E7FFA /* getgenerate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getgenerate.json; sourceTree = "<group>"; };
+		07FEF6FD18C24E39007D1FA4 /* getconnectioncount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getconnectioncount.json; sourceTree = "<group>"; };
 		2CC1F2CF72DB4DB1AAFBC821 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		425FE78FF73B4764AE68215B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +157,8 @@
 				07CAF55D18BF09C600A7C3F1 /* getbalance_test_1.json */,
 				07CAF55E18BF09C600A7C3F1 /* getbalance.json */,
 				07152FDA18BD06CB007035A2 /* getblock.json */,
+				07FEF6FD18C24E39007D1FA4 /* getconnectioncount.json */,
+				07E9589918C251C9001E7FFA /* getgenerate.json */,
 				07152FDB18BD06CB007035A2 /* getinfo.json */,
 				07152FDC18BD06CB007035A2 /* getpeerinfo.json */,
 				07152FDD18BD06CB007035A2 /* getrawtransaction.json */,
@@ -374,7 +380,9 @@
 				07152FE218BD06CB007035A2 /* getblock.json in Resources */,
 				07253EAE18C02DE600689FD2 /* getreceivedbyaddress.json in Resources */,
 				07253EAC18C02CEB00689FD2 /* getnewaddress.json in Resources */,
+				07FEF6FE18C24E39007D1FA4 /* getconnectioncount.json in Resources */,
 				07152FE718BD06CB007035A2 /* listaccounts.json in Resources */,
+				07E9589A18C251C9001E7FFA /* getgenerate.json in Resources */,
 				07152FE618BD06CB007035A2 /* gettransaction.json in Resources */,
 				0743BFE5189DC22900464FD9 /* InfoPlist.strings in Resources */,
 				07152FE318BD06CB007035A2 /* getinfo.json in Resources */,

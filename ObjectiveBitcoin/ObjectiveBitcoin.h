@@ -92,6 +92,20 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getBlockCount:(void (^)(NSNumber *blockCount))success
              failure:(void (^)(NSError *error))failure;
 
+
+
+/**
+ *  Returns the number of connections from other bitcoind nodes
+ *
+ *  @param success Success block returning number of connections
+ *  @param failure Failure block returning NSError
+ */
+-(void)getConnectionCount:(void (^)(NSNumber *connectionCount))success
+                  failure:(void (^)(NSError *error))failure;
+
+
+
+
 /**
  *  Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
  *
@@ -100,6 +114,15 @@ withMinimumConfirmations:(NSNumber *)minconf
  */
 -(void)getDifficulty:(void (^)(NSNumber *difficulty))success
              failure:(void (^)(NSError *error))failure;
+
+/**
+ *  Returns true or false whether bitcoind is currently generating hashes
+ *
+ *  @param success Success block returning true if bitcoind is currently generating hashes, false if it is not
+ *  @param failure Failure block with NSError
+ */
+-(void)getGenerate:(void (^)(BOOL isGeneratingHashes))success
+           failure:(void (^)(NSError *error))failure;
 
 /**
  *  Returns a recent hashes per second performance measurement while generating.  If not generating hashes, 0 is returned.
@@ -155,29 +178,8 @@ withMinimumConfirmations:(NSNumber *)minconf
                     success:(void (^)(NSNumber *amount))success
                     failure:(void (^)(NSError *error))failure;
 
-
 /**
- *  Returns the amount received by <bitcoinaddress> in transactions with at least [minconf] confirmations. It correctly handles the case where someone has sent to the address in multiple transactions. Keep in mind that addresses are only ever used for receiving transactions. Works only for addresses in the local wallet, external addresses will always show 0.
- *
- *  @param address Address you want to know how much has been received
- *  @param minconf Only add transaction if it has this many minimum confirmations
- *  @param success Success block returning NSNumber amount of total bitcoins received by this address with the minimum confirmations
- *  @param failure Failure block returning NSError
- */
--(void)getReceivedByAddress:(NSString *)address
-   withMinimumConfirmations:(NSNumber *)minconf
-                    success:(void (^)(NSNumber *balance))success
-                    failure:(void (^)(NSError *error))failure;
-
-
--(void)getReceivedByAddress:(NSString *)address
-                    success:(void (^)(NSNumber *balance))success
-                    failure:(void (^)(NSError *error))failure;
-
-
-
-/**
- *  eturns the total amount received by addresses in the specified account in transactions with at least x confirmations. If account not provided return will include all transactions to all accounts.
+ *  Returns the total amount received by addresses in the specified account in transactions with at least x confirmations. If account not provided return will include all transactions to all accounts.
  *
  *  @param account Account name
  *  @param minconf Number of minimum confirmations
@@ -189,6 +191,27 @@ withMinimumConfirmations:(NSNumber *)minconf
                     success:(void (^)(NSNumber *amount))success
                     failure:(void (^)(NSError *error))failure;
 
+
+/**
+ *  Returns the amount received by <bitcoinaddress> in transactions with at least [minconf] confirmations. It correctly handles the case where someone has sent to the address in multiple transactions. Keep in mind that addresses are only ever used for receiving transactions. Works only for addresses in the local wallet, external addresses will always show 0.
+ *
+ *  @param address Address you want to know how much has been received
+ *  @param minconf Only add transaction if it has this many minimum confirmations
+ *  @param success Success block returning NSNumber amount of total bitcoins received by this address with the minimum confirmations
+ *  @param failure Failure block returning NSError
+ */
+-(void)getReceivedByAddress:(NSString *)address
+   withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *amount))success
+                    failure:(void (^)(NSError *error))failure;
+
+
+
+-(void)getReceivedByAddress:(NSString *)address
+                    success:(void (^)(NSNumber *amount))success
+                    failure:(void (^)(NSError *error))failure;
+
+    
 
 
 /**
@@ -236,11 +259,10 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)listAccounts:(void (^)(NSArray *accounts))success
             failure:(void (^)(NSError *error))failure;
 
+
+
+
 #pragma mark - unimplemented
-
-
-
-
 
 
 -(void)getAddedNodeInfo:(Boolean)useDNS
@@ -259,19 +281,9 @@ withMinimumConfirmations:(NSNumber *)minconf
             failure:(void (^)(NSError *error))failure;
 
 
-
--(void)getConnectionCount:(void (^)(NSNumber *connections))success
-             failure:(void (^)(NSError *error))failure;
-
-
-
-
-
 -(void)getRawMemPool:(void (^)(NSArray *poolList))success
              failure:(void (^)(NSError *error))failure;
 
--(void)getGenerate:(void (^)(Boolean *isGeneratingHashes))success
-             failure:(void (^)(NSError *error))failure;
 
 -(void)getMiningInfo:(void (^)(NSDictionary *miningInfoDict))success
        failure:(void (^)(NSError *error))failure;
