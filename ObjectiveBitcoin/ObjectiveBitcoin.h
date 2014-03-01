@@ -168,15 +168,24 @@ withMinimumConfirmations:(NSNumber *)minconf
            failure:(void (^)(NSError *error))failure;
 
 /**
- *  Returns the total amount received by addresses in the specified account in transactions with at least 1 confirmation. If account not provided return will include all transactions to all accounts.
+ *  Returns all transaction ids in memory pool
  *
- *  @param account Account name
- *  @param success Success block returning the amount
+ *  @param success Success block returning NSArray of transaction IDs
  *  @param failure Failure block returning NSError
  */
--(void)getReceivedByAccount:(NSString *)account
-                    success:(void (^)(NSNumber *amount))success
-                    failure:(void (^)(NSError *error))failure;
+-(void)getRawMemPool:(void (^)(NSArray *poolList))success
+             failure:(void (^)(NSError *error))failure;
+
+/**
+ *  Returns raw transaction for given transaction ID.  The transaction input need to have been performed on your bitcoind instance OR bitcoind needs to be started with the -reindex -txindex flags set.  Otherwise you'll get an error about an unknown transaction.  See http://bitcoin.stackexchange.com/a/9152/10996 for details.
+ *
+ *  @param transactionId Valid transaction ID.
+ *  @param success       Success block returning details of the raw transaction
+ *  @param failure       Failure block returning NSError
+ */
+-(void)getRawTransaction:(NSString *)transactionId
+                 success:(void (^)(BitcoinRawTransaction *rawTransaction))success
+                 failure:(void (^)(NSError *error))failure;
 
 /**
  *  Returns the total amount received by addresses in the specified account in transactions with at least x confirmations. If account not provided return will include all transactions to all accounts.
@@ -188,6 +197,10 @@ withMinimumConfirmations:(NSNumber *)minconf
  */
 -(void)getReceivedByAccount:(NSString *)account
    withMinimumConfirmations:(NSNumber *)minconf
+                    success:(void (^)(NSNumber *amount))success
+                    failure:(void (^)(NSError *error))failure;
+
+-(void)getReceivedByAccount:(NSString *)account
                     success:(void (^)(NSNumber *amount))success
                     failure:(void (^)(NSError *error))failure;
 
@@ -210,20 +223,6 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getReceivedByAddress:(NSString *)address
                     success:(void (^)(NSNumber *amount))success
                     failure:(void (^)(NSError *error))failure;
-
-    
-
-
-/**
- *  Returns raw transaction for given transaction ID.  The transaction input need to have been performed on your bitcoind instance OR bitcoind needs to be started with the -reindex -txindex flags set.  Otherwise you'll get an error about an unknown transaction.  See http://bitcoin.stackexchange.com/a/9152/10996 for details.
- *
- *  @param transactionId Valid transaction ID.
- *  @param success       Success block returning details of the raw transaction
- *  @param failure       Failure block returning NSError
- */
--(void)getRawTransaction:(NSString *)transactionId
-                 success:(void (^)(BitcoinRawTransaction *rawTransaction))success
-                 failure:(void (^)(NSError *error))failure;
 
 
 
@@ -265,11 +264,11 @@ withMinimumConfirmations:(NSNumber *)minconf
 #pragma mark - unimplemented
 
 
--(void)getAddedNodeInfo:(Boolean)useDNS
+-(void)getAddedNodeInfo:(BOOL)useDNS
                     success:(void (^)(NSString *blockHash))success
                     failure:(void (^)(NSError *error))failure;
 
--(void)getAddedNodeInfo:(Boolean)useDNS
+-(void)getAddedNodeInfo:(BOOL)useDNS
                    node:(NSString *)nodeString
                 success:(void (^)(NSString *blockHash))success
                 failure:(void (^)(NSError *error))failure;
@@ -281,8 +280,7 @@ withMinimumConfirmations:(NSNumber *)minconf
             failure:(void (^)(NSError *error))failure;
 
 
--(void)getRawMemPool:(void (^)(NSArray *poolList))success
-             failure:(void (^)(NSError *error))failure;
+
 
 
 -(void)getMiningInfo:(void (^)(NSDictionary *miningInfoDict))success

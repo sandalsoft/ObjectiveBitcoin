@@ -258,6 +258,31 @@
 	WaitForBlock();
 }
 
+- (void)testGetRawMemPool {
+    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+	[OHHTTPStubs stubRequestsPassingTest: ^BOOL (NSURLRequest *request) {
+	    return YES;
+	} withStubResponse: ^OHHTTPStubsResponse *(NSURLRequest *request) {
+	    return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+	}].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+	TestNeedsToWaitForBlock();
+    
+    [self.client getRawMemPool:^(NSArray *poolList) {
+        NSString *txid = [NSString stringWithString:[poolList objectAtIndex:2]];
+        XCTAssertTrue([txid isEqualToString:@"56aa993f67503c983a06c1b45649e636e018f10a0fe264519cc7434f3d7e7a79"], @"%@ should be equal to 56aa993f67503c983a06c1b45649e636e018f10a0fe264519cc7434f3d7e7a79", txid);
+	    BlockFinished();
+	} failure: ^(NSError *error) {
+	    NSLog(@"Error in %@: %@", NSStringFromSelector(_cmd), [error description]);
+	    XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+	    BlockFinished();
+	}];
+    
+	WaitForBlock();
+}
+
 - (void)testGetRawTransaction {
 	// Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
 	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];

@@ -121,13 +121,10 @@ withMinimumConfirmations:(NSNumber *)minconf
 -(void)getGenerate:(void (^)(BOOL))success
            failure:(void (^)(NSError *))failure {
     [self.bitcoindClient callMethod:@"getgenerate" withParams:@[] success:^(NSDictionary *jsonData) {
-        BOOL isGeneratingHashes; // =(BOOL)[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY];
         if ([[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY] boolValue] == YES)
-//if([isSuccessNumber boolValue] == YES)
-            isGeneratingHashes = YES;
+            success(YES);
         else
-            isGeneratingHashes = NO;
-        success(isGeneratingHashes);
+            success(NO);
     } failure:^(NSError *error) {
         failure(error);
     }];
@@ -183,6 +180,14 @@ withMinimumConfirmations:(NSNumber *)minconf
         failure(error);
     }];
     
+}
+
+-(void)getRawMemPool:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"getrawmempool" withParams:@[] success:^(NSDictionary *jsonData) {
+        success([jsonData objectForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
 }
 
 -(void)getRawTransaction:(NSString *)transactionId
