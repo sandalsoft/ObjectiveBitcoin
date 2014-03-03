@@ -92,7 +92,7 @@
 }
 
 - (void)getBlockHash:(NSNumber *)blockNumber success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure {
-	[self.bitcoindClient callMethod:@"getblockhash" withParams:@[] success: ^(NSDictionary *jsonData) {
+	[self.bitcoindClient callMethod:@"getblockhash" withParams:@[blockNumber] success: ^(NSDictionary *jsonData) {
 	    success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
 	} failure: ^(NSError *error) {
 	    failure(error);

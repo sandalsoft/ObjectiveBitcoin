@@ -93,7 +93,6 @@
               failure:(void (^)(NSError *error))failure;
 
 
-
 /**
  *  Returns hash of block in best-block-chain at <index>; index 0 is the genesis block
  *
@@ -113,8 +112,6 @@
  */
 - (void)getConnectionCount:(void (^)(NSNumber *connectionCount))success
                    failure:(void (^)(NSError *error))failure;
-
-
 
 
 /**
