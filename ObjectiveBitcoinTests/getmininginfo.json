@@ -1,0 +1,16 @@
+{
+    "result": {
+        "blocks": 201637,
+        "currentblocksize": 0,
+        "currentblocktx": 0,
+        "difficulty": 1.00000000,
+        "errors": "",
+        "generate": false,
+        "genproclimit": -1,
+        "hashespersec": 0,
+        "pooledtx": 5,
+        "testnet": true
+    },
+    "error": null,
+    "id": "bcurl"
+}

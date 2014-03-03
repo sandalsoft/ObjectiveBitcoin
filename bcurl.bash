@@ -1,0 +1,39 @@
+#!/bin/bash
+
+method=$1
+re='^[0-9]+([.][0-9]+)?$'
+params=""
+total=$#
+((counter=1))
+
+for var in $@
+do
+  # if it's the first argument ($1, the method name), skip it
+  if [[ $counter -eq 1 ]]
+    then
+      ((counter=counter + 1))
+      continue
+  fi
+  # If variable is a number,
+  if  [[ $var =~ $re ]]
+    then
+      # Don't put in quotes
+      params="$params $var"
+    # var is a word
+    else
+      # put the word var in quotes
+      params="$params \"$var\""
+  fi
+  #if it's not the last var, add a comma
+  if [[ $counter -ne $total ]]
+    then
+      params="$params,"
+    # it is the last var, so don't add a comma
+    else
+      params="$params"
+    fi
+((counter=counter + 1))
+done
+
+curl  --user u:p --data-binary "{\"jsonrpc\": \"1.0\", \"id\":\"bcurl\", \"method\": \"$1\", \"params\": [$params]}"  -H 'content-type: text/plain'\; http://dev.sndl.io:18332/
+

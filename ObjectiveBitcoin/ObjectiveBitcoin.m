@@ -150,6 +150,14 @@ withMinimumConfirmations:(NSNumber *)minconf
     }];
 }
 
+-(void)getMiningInfo:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"getmininginfo" withParams:@[] success:^(NSDictionary *jsonData) {
+        success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 -(void)getPeerInfo:(void (^)(NSArray *))success
            failure:(void (^)(NSError *))failure {
     [self.bitcoindClient callMethod:@"getpeerinfo" withParams:@[] success:^(NSDictionary *jsonData) {

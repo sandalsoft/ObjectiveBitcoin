@@ -232,6 +232,30 @@
 	WaitForBlock();
 }
 
+- (void)testGetMiningInfo {
+    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+	[OHHTTPStubs stubRequestsPassingTest: ^BOOL (NSURLRequest *request) {
+	    return YES;
+	} withStubResponse: ^OHHTTPStubsResponse *(NSURLRequest *request) {
+	    return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+	}].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+	TestNeedsToWaitForBlock();
+    
+    [self.client getMiningInfo:^(NSDictionary *miningInfoDict) {
+        XCTAssertTrue([[miningInfoDict valueForKey:@"blocks"] isEqualToNumber:@201637], @"%@ should be equal to 201637", [miningInfoDict valueForKey:@"blocks"]);
+	    BlockFinished();
+	} failure: ^(NSError *error) {
+	    NSLog(@"Error in %@: %@", NSStringFromSelector(_cmd), [error description]);
+	    XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+	    BlockFinished();
+	}];
+    
+	WaitForBlock();
+}
+
 - (void)testGetPeerInfo {
 	// Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
 	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
