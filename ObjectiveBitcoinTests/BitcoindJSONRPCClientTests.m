@@ -28,19 +28,11 @@
     [super tearDown];
 }
 
-/*
- 
- 
- 
- 
-            TODO:  Add tests that exercise callMethod and test for error codes
- 
-                Create tests with failing HTTP status codes to ensure method fails properly
- 
-                Create test that checks bitcoind error response JSON for null
- 
- 
- */
+#warning "Add tests that exercise callMethod and test for error codes"
+
+#warning "TODO Create tests with failing HTTP status codes to ensure method fails properly"
+#warning "Create test that checks bitcoind error response JSON for null"
+
 
 - (void)testEncodeUsernamePassword {
     XCTAssertTrue([[self.client encodeUsernamePassword:@"u" password:@"p"] isEqualToString:@"dTpw"],@"Base64 Encoded \"u:p\" should equal \"dTpw\"");

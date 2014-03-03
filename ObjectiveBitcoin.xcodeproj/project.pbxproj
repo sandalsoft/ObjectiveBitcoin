@@ -48,6 +48,7 @@
 		07920D1118BA96630076BE43 /* BitcoinAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 07920D0F18BA96630076BE43 /* BitcoinAddress.m */; };
 		07B46EB418C299A000DEAD3D /* getrawmempool.json in Resources */ = {isa = PBXBuildFile; fileRef = 07B46EB318C299A000DEAD3D /* getrawmempool.json */; };
 		07C7CE3418C4413600F501DE /* getmininginfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 07C7CE3318C4413600F501DE /* getmininginfo.json */; };
+		07C7CE3618C50EDE00F501DE /* getblockhash.json in Resources */ = {isa = PBXBuildFile; fileRef = 07C7CE3518C50EDE00F501DE /* getblockhash.json */; };
 		07CAF55F18BF09C600A7C3F1 /* getbalance_test_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 07CAF55D18BF09C600A7C3F1 /* getbalance_test_1.json */; };
 		07CAF56018BF09C600A7C3F1 /* getbalance.json in Resources */ = {isa = PBXBuildFile; fileRef = 07CAF55E18BF09C600A7C3F1 /* getbalance.json */; };
 		07D0067718B02F1B00D68CC8 /* BitcoinTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 07D0067518B02F1B00D68CC8 /* BitcoinTransaction.h */; };
@@ -117,6 +118,7 @@
 		07920D0F18BA96630076BE43 /* BitcoinAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitcoinAddress.m; sourceTree = "<group>"; };
 		07B46EB318C299A000DEAD3D /* getrawmempool.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getrawmempool.json; sourceTree = "<group>"; };
 		07C7CE3318C4413600F501DE /* getmininginfo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getmininginfo.json; sourceTree = "<group>"; };
+		07C7CE3518C50EDE00F501DE /* getblockhash.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getblockhash.json; sourceTree = "<group>"; };
 		07CAF55D18BF09C600A7C3F1 /* getbalance_test_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getbalance_test_1.json; sourceTree = "<group>"; };
 		07CAF55E18BF09C600A7C3F1 /* getbalance.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getbalance.json; sourceTree = "<group>"; };
 		07D0067518B02F1B00D68CC8 /* BitcoinTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitcoinTransaction.h; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				07253EAD18C02DE600689FD2 /* getreceivedbyaddress.json */,
 				07B46EB318C299A000DEAD3D /* getrawmempool.json */,
 				07C7CE3318C4413600F501DE /* getmininginfo.json */,
+				07C7CE3518C50EDE00F501DE /* getblockhash.json */,
 				07253EB918C0FC5F00689FD2 /* getdifficulty.json */,
 				07152FDF18BD06CB007035A2 /* listaccounts.json */,
 				07152FE018BD06CB007035A2 /* listunspent.json */,
@@ -379,6 +382,7 @@
 			files = (
 				07253EA818C01F2300689FD2 /* getreceivedbyaccount.json in Resources */,
 				07B46EB418C299A000DEAD3D /* getrawmempool.json in Resources */,
+				07C7CE3618C50EDE00F501DE /* getblockhash.json in Resources */,
 				07253EB218C051AA00689FD2 /* getblockcount.json in Resources */,
 				07152FE918BD06CB007035A2 /* validateaddress.json in Resources */,
 				07152FE518BD06CB007035A2 /* getrawtransaction.json in Resources */,
