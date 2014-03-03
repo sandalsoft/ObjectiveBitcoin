@@ -416,7 +416,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#if [ ${CONFIGURATION} == \"Release\" ]; then\nAPPLEDOC_PATH=/usr/local/bin/appledoc\nif [ $APPLEDOC_PATH ]; then\n\ntouch ${PRODUCT_NAME}test\n\n$APPLEDOC_PATH \\\n--project-name ${PRODUCT_NAME} \\\n--project-company \"Eric Nelson\" \\\n--company-id \"com.sandalsoft\" \\\n--output ${PRODUCT_NAME}Docs \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n${PROJECT_DIR}/${PRODUCT_NAME}\nfi;\n#fi;";
+			shellScript = "#if [ ${CONFIGURATION} == \"Release\" ]; then\nAPPLEDOC_PATH=/usr/local/bin/appledoc\nif [ $APPLEDOC_PATH ]; then\n\n$APPLEDOC_PATH \\\n--project-name ${PRODUCT_NAME} \\\n--project-company \"Eric Nelson\" \\\n--company-id \"com.sandalsoft\" \\\n--output ${PRODUCT_NAME}Docs \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n${PROJECT_DIR}/${PRODUCT_NAME}\nfi;\n#fi;";
 		};
 		382A1DBD27404992A7B8F48F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
