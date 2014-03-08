@@ -41,6 +41,17 @@
 
 #pragma mark - bitcoind methods
 
+
+/**
+ *  Reveals the private key corresponding to <bitcoinaddress>Reveals the private key corresponding to <bitcoinaddress>
+ *
+ *  @param address The bitcoin address to get the private key for
+ *  @param success Success block returning a NSString of the private key
+ *  @param failure Failure block returning NSError
+ */
+- (void)dumpPrivateKeyForAddress:(NSString *)address
+                         success:(void (^)(NSString *key))success
+                         failure:(void (^)(NSError *error))failure;
 /**
  *  Returns current bitcoin address for receiving payments to this account.  Bitcoind method: getaccountaddress
  *
@@ -290,6 +301,17 @@
 
 
 #pragma mark - unimplemented
+
+- (void)getWorkForData:(NSString *)data
+        success:(void (^)(BOOL isWorkCompleted))success
+        failure:(void (^)(NSError *error))failure;
+
+- (void)getWork:(void (^)(NSDictionary *workDict))success
+        failure:(void (^)(NSError *error))failure;
+
+//- (void)getGenerate:(void (^)(BOOL isGeneratingHashes))success
+//            failure:(void (^)(NSError *error))failure;
+
 
 
 - (void)getAddedNodeInfo:(BOOL)useDNS

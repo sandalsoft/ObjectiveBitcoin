@@ -87,7 +87,9 @@
             // If we get a 200, the POST succeseded.  Parse the response JSON into a NSDictionary and return the success() block
             case 200: {
                 NSDictionary *info = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                
+                NSLog(@"RAW DATA: %@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+                NSLog(@"error value: %@", [info valueForKey:@"error"]);
+                NSLog(@"info dict: %@", [info description]);
                 // If the error response from bitcoind is null, return the successful bitcoind response.
                 if ([[info valueForKey:@"error"] isKindOfClass:[NSNull class]]) 
                     success(info);

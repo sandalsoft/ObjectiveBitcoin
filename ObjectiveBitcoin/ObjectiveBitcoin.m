@@ -25,6 +25,14 @@
 
 #pragma mark - bitciond methods
 
+- (void)dumpPrivateKeyForAddress:(NSString *)address success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure {
+        [self.bitcoindClient callMethod:@"dumpprivkey" withParams:@[address] success:^(NSDictionary *jsonData) {
+            success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+        } failure:^(NSError *error) {
+            failure(error);
+        }];
+}
+
 - (void)getAccountAddress:(NSString *)account
                   success:(void (^)(BitcoinAddress *address))success
                   failure:(void (^)(NSError *error))failure {
@@ -287,6 +295,30 @@
 	    failure(error);
 	}];
 }
+
+- (void)getWorkForData:(NSString *)data
+               success:(void (^)(BOOL isWorkCompleted))success
+               failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"getwork" withParams:@[data] success:^(NSDictionary *jsonData) {
+        if ([[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY] boolValue] == YES)
+            success(YES);
+        else
+            success(NO);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+    
+}
+
+- (void)getWork:(void (^)(NSDictionary *workDict))success
+        failure:(void (^)(NSError *error))failure {
+    [self.bitcoindClient callMethod:@"getwork" withParams:@[] success:^(NSDictionary *jsonData) {
+        success([jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 
 - (void)listAccounts:(void (^)(NSArray *))success
              failure:(void (^)(NSError *error))failure {

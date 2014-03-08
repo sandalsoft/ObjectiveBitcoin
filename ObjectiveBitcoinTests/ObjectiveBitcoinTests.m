@@ -61,6 +61,33 @@
 	[OHHTTPStubs removeAllStubs];
 }
 
+- (void)testDumpPrivateKeyForAddress {
+    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+    
+	[OHHTTPStubs stubRequestsPassingTest: ^BOOL (NSURLRequest *request) {
+//        NSLog(@"request.URL.host: %@", request);
+//        NSLog(@"stub host string: %@", self.OHTTPStubHostString);
+//        return [request.URL.host isEqualToString:self.OHTTPStubHostString];
+	    return YES;
+	} withStubResponse: ^OHHTTPStubsResponse *(NSURLRequest *request) {
+	    return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+	}].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+    
+	TestNeedsToWaitForBlock();
+    
+    [self.client dumpPrivateKeyForAddress:self.bitcoinAddress success:^(NSString *key) {
+        XCTAssertTrue(YES); //[key isEqualToString:@"cPcfFhJrVK8QiUBskFv6eMeDMUbEnrqEC1v4XiuEmafWkeSvyNm7"], @"%@ should be equal to cPcfFhJrVK8QiUBskFv6eMeDMUbEnrqEC1v4XiuEmafWkeSvyNm7", key);
+	    BlockFinished();
+	} failure: ^(NSError *error) {
+	    NSLog(@"Error in %@: %@", NSStringFromSelector(_cmd), [error description]);
+	    XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+	    BlockFinished();
+	}];
+    
+	WaitForBlock();
+}
+
 - (void)testGetBalance {
 	// Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
 	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
@@ -183,6 +210,10 @@
     
 	WaitForBlock();
 }
+
+
+
+
 
 - (void)testGetGenerate {
 	// Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
@@ -428,6 +459,55 @@
 	}];
 	WaitForBlock();
 }
+
+//- (void)testGetWork {
+//    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+//	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+//    
+//	[OHHTTPStubs stubRequestsPassingTest: ^BOOL (NSURLRequest *request) {
+//	    return YES;
+//	} withStubResponse: ^OHHTTPStubsResponse *(NSURLRequest *request) {
+//	    return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+//	}].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+//    
+//	TestNeedsToWaitForBlock();
+//
+//    [self.client getWork:^(NSDictionary *workDict) {
+//        XCTAssertTrue([[workDict valueForKey:@"midstate"] isEqualToString:@"69f25ee53bd4162eeaf18a72a0659911fea2022bafb82d016a4aeba0a9466ef4"], @"%@ should be equal to 69f25ee53bd4162eeaf18a72a0659911fea2022bafb82d016a4aeba0a9466ef4", [workDict valueForKey:@"mdstate"]);
+//	    BlockFinished();
+//	} failure: ^(NSError *error) {
+//	    NSLog(@"Error in %@: %@", NSStringFromSelector(_cmd), [error description]);
+//	    XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+//	    BlockFinished();
+//	}];
+//
+//	WaitForBlock();
+//}
+
+//- (void)testGetWorkForData {
+//    // Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it
+//	NSString *stubDataFileName = [NSString stringWithFormat:@"%@.json", [[NSStringFromSelector(_cmd) substringFromIndex:4] lowercaseString]];
+//
+//	[OHHTTPStubs stubRequestsPassingTest: ^BOOL (NSURLRequest *request) {
+//	    return YES;
+//	} withStubResponse: ^OHHTTPStubsResponse *(NSURLRequest *request) {
+//	    return [OHHTTPStubsResponse responseWithFileAtPath:OHPathForFileInBundle(stubDataFileName, nil) statusCode:200 headers:nil];
+//	}].name = [NSString stringWithFormat:@"Stub for %@", NSStringFromSelector(_cmd)];
+//    
+//	TestNeedsToWaitForBlock();
+//    
+//    [self.client getWorkForData:@"00000002e86063f8d27e08eee14fa250f39698808e396ad35c4230e30034e77e0000000044b2ac9e24b65595a74fa285408a67c488af820d69f6eacca95c3d79cf1a587953168e2c1b602ac000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000" success:^(BOOL isWorkCompleted) {
+//        XCTAssertFalse(isWorkCompleted, @"%hhu should be false", isWorkCompleted);
+//	    BlockFinished();
+//	} failure: ^(NSError *error) {
+//	    NSLog(@"Error in %@: %@", NSStringFromSelector(_cmd), [error description]);
+//	    XCTFail(@"Failure in %@", NSStringFromSelector(_cmd));
+//	    BlockFinished();
+//	}];
+//    
+//	WaitForBlock();
+//}
+//
 
 - (void)testListAccounts {
 	// Extracts the stub data filename from the test method name.  It removes the first 4 characters, then lowercases it

@@ -36,5 +36,5 @@ do
 done
 
 # Uncomment out --trace-ascii /dev/stdout to get verbose trace data on curl POST
-curl  --user u:p --data-binary "{\"jsonrpc\": \"1.0\", \"id\":\"bcurl\", \"method\": \"$1\", \"params\": [$params]}"  -H 'content-type: text/plain'\; http://dev.sndl.io:18332/ #--trace-ascii /dev/stdout
+curl  --user u:p --data-binary "{\"jsonrpc\": \"1.0\", \"id\":\"bcurl\", \"method\": \"$1\", \"params\": [$params]}"  -H 'content-type: text/plain'\; http://dev.sndl.io:18332/ | underscore print --outfmt pretty #--trace-ascii /dev/stdout
 
