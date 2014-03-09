@@ -277,6 +277,33 @@
                success:(void (^)(BitcoinTransaction *transaction))success
                failure:(void (^)(NSError *error))failure;
 
+
+/**
+ *  Tries to solve the block and returns true if it was successful.
+ *
+ *  @param data    Block bitcoind tries to solve
+ *  @param success Success block returning BOOL if it was successful or not solving block
+ *  @param failure Failure block returning NSError
+ */
+- (void)getWorkForData:(NSString *)data
+               success:(void (^)(BOOL isBlockSolved))success
+               failure:(void (^)(NSError *error))failure;
+
+
+/**
+ *   Returns formatted hash data to work on:
+ "midstate" : precomputed hash state after hashing the first half of the data
+ "data" : block data
+ "hash1" : formatted hash buffer for second hash
+ "target" : little endian hash target
+ *
+ *  @param success Success block returning NSDictionary of hash data to work on
+ *  @param failure Failure block returning NSError
+ */
+- (void)getWork:(void (^)(NSDictionary *workDict))success
+        failure:(void (^)(NSError *error))failure;
+
+
 /**
  *  Determines if an address is valid and if it is owned by this wallet.  Returns details of the address
  *
@@ -298,16 +325,21 @@
              failure:(void (^)(NSError *error))failure;
 
 
+/**
+ *  Returns all addresses in the wallet and info used for coincontrol.
+ *
+ *  @param success NSArray of address groupings with address, amount in wallet and account names
+ *  @param failure Failure block returning NSError
+ */
+- (void)listAddressGroupings:(void (^)(NSArray *addressGroupings))success
+                     failure:(void (^)(NSError *error))failure;
+
+
 
 
 #pragma mark - unimplemented
 
-- (void)getWorkForData:(NSString *)data
-        success:(void (^)(BOOL isWorkCompleted))success
-        failure:(void (^)(NSError *error))failure;
 
-- (void)getWork:(void (^)(NSDictionary *workDict))success
-        failure:(void (^)(NSError *error))failure;
 
 //- (void)getGenerate:(void (^)(BOOL isGeneratingHashes))success
 //            failure:(void (^)(NSError *error))failure;

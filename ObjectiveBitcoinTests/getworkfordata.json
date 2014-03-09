@@ -1,5 +1,5 @@
 {
-    result: false,
-    error: null,
-    id: "bcurl"
+    "result": false,
+    "error": null,
+    "id": "bcurl"
 }

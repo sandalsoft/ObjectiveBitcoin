@@ -297,7 +297,7 @@
 }
 
 - (void)getWorkForData:(NSString *)data
-               success:(void (^)(BOOL isWorkCompleted))success
+               success:(void (^)(BOOL isBlockSolved))success
                failure:(void (^)(NSError *error))failure {
     [self.bitcoindClient callMethod:@"getwork" withParams:@[data] success:^(NSDictionary *jsonData) {
         if ([[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY] boolValue] == YES)
@@ -336,6 +336,14 @@
 	}];
 }
 
+- (void)listAddressGroupings:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"listaddressgroupings" withParams:@[] success:^(NSDictionary *jsonData) {
+        NSArray *addressGroupings = [[NSArray alloc] initWithArray:[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY]];
+        success(addressGroupings);
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
 - (void)validateAddress:(NSString *)addressString
                 success:(void (^)(BitcoinAddress *address))success
                 failure:(void (^)(NSError *error))failure {

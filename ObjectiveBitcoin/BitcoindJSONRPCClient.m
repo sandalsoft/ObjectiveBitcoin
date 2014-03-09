@@ -95,7 +95,9 @@
                     success(info);
 
                 // If we get a 200 but bitcoind returns an error object,return the error object.
-                // This shouldn't happen.  Bitcoind should return a 500 if there's an error.
+                // This shouldn't usually happen,  Bitcoind should return a 500 if there's an error.
+                // This probably means you got invalid JSON back from bitcoind or OHHTTPStubs.  Lack of quotes around keys in JSON will cause this
+                
                 else {
                     NSDictionary *bitcoindErrorDict = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil] valueForKey:@"error"];
                     

@@ -1,0 +1,18 @@
+{
+"result": [
+         [
+          ["mqj7yhNpMGeBHAZLSgaYCTJzHdztbguneE", 1.5989],
+          ["mtnRy147pyP9CYDgvQKfcxcivGMySArSwU", 0, "test"]
+          ],
+         [
+          ["mhfsyuDmAnrWx7gVsgUM6tGQhQPigMnFY5", 1.17],
+          ["mkRzQBbL3h7nJtnLoHtPzZ5ML4MK9KLjfd", 0, ""]
+          ],
+         [
+          ["msyJME2W62eZ5rto783ioh9mzgJZ1GiDju", 0, ""],
+          ["miL8puAp1SquwXw1vxcM3cRW7ChZLk1fk3", 0.1099]
+          ]
+         ],
+"error": null,
+"id": "bcurl"
+}
