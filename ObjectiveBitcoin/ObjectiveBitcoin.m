@@ -344,6 +344,19 @@
         failure(error);
     }];
 }
+
+- (void)setGenerate:(BOOL)willGenerate success:(void (^)(BOOL isSuccessful))success failure:(void (^)(NSError *))failure {
+    [self.bitcoindClient callMethod:@"setgenerate" withParams:@[@(willGenerate)] success:^(NSDictionary *jsonData) {
+        if ([[jsonData valueForKey:RESULT_BITCOIND_JSON_KEY] isKindOfClass:[NSNull class]])
+            success(YES);
+        else
+            success(NO);
+        }
+            failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 - (void)validateAddress:(NSString *)addressString
                 success:(void (^)(BitcoinAddress *address))success
                 failure:(void (^)(NSError *error))failure {

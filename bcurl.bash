@@ -1,7 +1,12 @@
 #!/bin/bash
 
 method=$1
+# This doesn't work with boolean inputs.  They're currently being quoted, they should not be.
+# re='^[0-9]+([0-9]?[.][0-9]+)?$'
+
 re='^[0-9]+([.][0-9]+)?$'
+
+bool_re='^(true|false)'
 params=""
 total=$#
 ((counter=1))

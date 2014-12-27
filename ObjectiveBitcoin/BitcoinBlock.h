@@ -10,7 +10,7 @@
 
 @interface BitcoinBlock : NSObject
 
-@property (weak, nonatomic) NSString *hash;
+@property (weak, nonatomic) NSString *blockHash;
 @property (weak, nonatomic) NSNumber *confirmations;
 @property (weak, nonatomic) NSNumber *size;
 @property (weak, nonatomic) NSNumber *height;

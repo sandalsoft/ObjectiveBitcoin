@@ -13,7 +13,7 @@
 
 - (id)initWithDictionary:(NSDictionary *)blockDict {
     if ((self = [super init])) {
-        _hash = [blockDict valueForKey:@"hash"];
+        _blockHash = [blockDict valueForKey:@"hash"];
         _confirmations = [blockDict valueForKey:@"confirmations"];
         _size = [blockDict valueForKey:@"size"];
         _height = [blockDict valueForKey:@"height"];
@@ -34,7 +34,7 @@
 };
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"Hash: %@\n Confirmations: %@\n Size: %@\n Height: %@\n Version: %@\n MerkleRoot: %@\n Transactions: %@\n Time: %@\n None: %@\n Bits: %@\n Difficulty: %@\n PreviousBlockHash: %@\n", self.hash, self.confirmations, self.size, self.height, self.version, self.merkleRoot, self.transactions, self.time, self.nonce, self.bits, self.difficulty, self.previousBlockHash];
+    return [NSString stringWithFormat:@"Hash: %@\n Confirmations: %@\n Size: %@\n Height: %@\n Version: %@\n MerkleRoot: %@\n Transactions: %@\n Time: %@\n None: %@\n Bits: %@\n Difficulty: %@\n PreviousBlockHash: %@\n", self.blockHash, self.confirmations, self.size, self.height, self.version, self.merkleRoot, self.transactions, self.time, self.nonce, self.bits, self.difficulty, self.previousBlockHash];
 }
 
 

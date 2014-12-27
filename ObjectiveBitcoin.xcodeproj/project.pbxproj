@@ -58,6 +58,8 @@
 		07D006BA18B0681C00D68CC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0743BFCC189DC22800464FD9 /* Foundation.framework */; };
 		07D006BC18B0682600D68CC8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */; };
 		07D3382218CBADB6005697FB /* listaddressgroupings.json in Resources */ = {isa = PBXBuildFile; fileRef = 07D3382118CBADB6005697FB /* listaddressgroupings.json */; };
+		07D3382418CD08FF005697FB /* setgenerate.json in Resources */ = {isa = PBXBuildFile; fileRef = 07D3382318CD08FF005697FB /* setgenerate.json */; };
+		07D3382618CE39CC005697FB /* settxfee.json in Resources */ = {isa = PBXBuildFile; fileRef = 07D3382518CE39CC005697FB /* settxfee.json */; };
 		07D4A4E518CA01AD00C588C8 /* dumpprivatekeyforaddress.json in Resources */ = {isa = PBXBuildFile; fileRef = 07D4A4E418CA01AD00C588C8 /* dumpprivatekeyforaddress.json */; };
 		07E9589A18C251C9001E7FFA /* getgenerate.json in Resources */ = {isa = PBXBuildFile; fileRef = 07E9589918C251C9001E7FFA /* getgenerate.json */; };
 		07FEF6FE18C24E39007D1FA4 /* getconnectioncount.json in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF6FD18C24E39007D1FA4 /* getconnectioncount.json */; };
@@ -132,6 +134,8 @@
 		07D006B918B0424F00D68CC8 /* ObjectiveBitcoin.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectiveBitcoin.podspec; sourceTree = SOURCE_ROOT; };
 		07D006BB18B0682600D68CC8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		07D3382118CBADB6005697FB /* listaddressgroupings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listaddressgroupings.json; sourceTree = "<group>"; };
+		07D3382318CD08FF005697FB /* setgenerate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = setgenerate.json; sourceTree = "<group>"; };
+		07D3382518CE39CC005697FB /* settxfee.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = settxfee.json; sourceTree = "<group>"; };
 		07D4A4E418CA01AD00C588C8 /* dumpprivatekeyforaddress.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dumpprivatekeyforaddress.json; sourceTree = "<group>"; };
 		07E3109718BED40000D21361 /* libPods-OHHTTPStubs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OHHTTPStubs.a"; path = "../../../../Library/Developer/Xcode/DerivedData/ObjectiveBitcoin-bvtqsoqqlgkwwbbgdgsvdfuptere/Build/Products/Debug/libPods-OHHTTPStubs.a"; sourceTree = "<group>"; };
 		07E9589918C251C9001E7FFA /* getgenerate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = getgenerate.json; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				07C7CE3318C4413600F501DE /* getmininginfo.json */,
 				07C7CE3518C50EDE00F501DE /* getblockhash.json */,
 				07253EB918C0FC5F00689FD2 /* getdifficulty.json */,
+				07D3382318CD08FF005697FB /* setgenerate.json */,
 				07152FDF18BD06CB007035A2 /* listaccounts.json */,
 				07D3382118CBADB6005697FB /* listaddressgroupings.json */,
 				07152FE018BD06CB007035A2 /* listunspent.json */,
@@ -194,6 +199,7 @@
 				07C7CE3718C6D4F800F501DE /* getwork.json */,
 				07C7CE3918C7BF5D00F501DE /* getworkfordata.json */,
 				07D4A4E418CA01AD00C588C8 /* dumpprivatekeyforaddress.json */,
+				07D3382518CE39CC005697FB /* settxfee.json */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -366,7 +372,7 @@
 		0743BFBE189DC22800464FD9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Sandalsoft;
 			};
 			buildConfigurationList = 0743BFC1189DC22800464FD9 /* Build configuration list for PBXProject "ObjectiveBitcoin" */;
@@ -403,12 +409,14 @@
 				07152FE418BD06CB007035A2 /* getpeerinfo.json in Resources */,
 				07152FE218BD06CB007035A2 /* getblock.json in Resources */,
 				07253EAE18C02DE600689FD2 /* getreceivedbyaddress.json in Resources */,
+				07D3382418CD08FF005697FB /* setgenerate.json in Resources */,
 				07253EAC18C02CEB00689FD2 /* getnewaddress.json in Resources */,
 				07D4A4E518CA01AD00C588C8 /* dumpprivatekeyforaddress.json in Resources */,
 				07FEF6FE18C24E39007D1FA4 /* getconnectioncount.json in Resources */,
 				07152FE718BD06CB007035A2 /* listaccounts.json in Resources */,
 				07C7CE3418C4413600F501DE /* getmininginfo.json in Resources */,
 				07E9589A18C251C9001E7FFA /* getgenerate.json in Resources */,
+				07D3382618CE39CC005697FB /* settxfee.json in Resources */,
 				07C7CE3818C6D4F800F501DE /* getwork.json in Resources */,
 				07152FE618BD06CB007035A2 /* gettransaction.json in Resources */,
 				0743BFE5189DC22900464FD9 /* InfoPlist.strings in Resources */,
@@ -621,6 +629,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 425FE78FF73B4764AE68215B /* Pods.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ObjectiveBitcoin/ObjectiveBitcoin-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -631,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 425FE78FF73B4764AE68215B /* Pods.xcconfig */;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ObjectiveBitcoin/ObjectiveBitcoin-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -305,17 +305,6 @@
 
 
 /**
- *  Determines if an address is valid and if it is owned by this wallet.  Returns details of the address
- *
- *  @param addressString Bitcoin address string
- *  @param success       Success block returning details of the address
- *  @param failure       Failure block with NSError
- */
-- (void)validateAddress:(NSString *)addressString
-                success:(void (^)(BitcoinAddress *address))success
-                failure:(void (^)(NSError *error))failure;
-
-/**
  *  Lists all accounts balances for each account
  *
  *  @param success Success block returning array of Account objects
@@ -335,6 +324,39 @@
                      failure:(void (^)(NSError *error))failure;
 
 
+//- (void)getWorkForData:(NSString *)data
+//               success:(void (^)(BOOL isBlockSolved))success
+//               failure:(void (^)(NSError *error))failure;
+
+
+- (void) setTransactionFee:(NSNumber *)data
+               success:(void (^)(BOOL isTransactionFeeSet))success
+               failure:(void (^)(NSError *error))failure;
+
+
+
+
+/**
+ *  Determines if an address is valid and if it is owned by this wallet.  Returns details of the address
+ *
+ *  @param addressString Bitcoin address string
+ *  @param success       Success block returning details of the address
+ *  @param failure       Failure block with NSError
+ */
+- (void)validateAddress:(NSString *)addressString
+                success:(void (^)(BitcoinAddress *address))success
+                failure:(void (^)(NSError *error))failure;
+
+
+#pragma  mark - broken
+- (void)setGenerate:(BOOL)willGenerate
+            success:(void (^)(BOOL isSuccessful))success
+            failure:(void (^)(NSError *error))failure;
+
+- (void)       setGenerate:(BOOL)willGenerate
+    withNumberOfProcessors:(NSNumber *)numProcs
+                   success:(void (^)(BOOL isSuccessful))success
+                   failure:(void (^)(NSError *error))failure;
 
 
 #pragma mark - unimplemented
